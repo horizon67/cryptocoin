@@ -38,10 +38,10 @@ gem 'mechanize', '~> 2.7.5'
 gem 'active_model_serializers', '~> 0.10.7'
 gem 'jwt', '~> 2.1.0'
 gem 'unicorn', '~> 5.4.0'
+gem 'byebug', platform: :mri
+gem 'pry-byebug'
 
 group :development, :test do
-  gem 'byebug', platform: :mri
-  gem 'pry-byebug'
   gem 'pry-stack_explorer'
   gem 'hirb'
   gem 'awesome_print'
