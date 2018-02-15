@@ -8,7 +8,7 @@ class OrderBtcWorker
     logger.info "OrderBtcWorker_zaif_bitbank: #{Exchange::Bitbank.ticker[:bid] - Exchange::Zaif.ticker[:ask]}"
     logger.info "OrderBtcWorker_quoine_zaif: #{Exchange::Zaif.ticker[:bid] - Exchange::Quoine.ticker[:ask]}"
     diff = Exchange::Zaif.ticker[:bid] - Exchange::Quoine.ticker[:ask]
-    if diff.to_f > 7500 and Exchange::Zaif.balances[:btc].to_f > amount.to_f
+    if diff.to_f > 8500 and Exchange::Zaif.balances[:btc].to_f > amount.to_f
       ret = Exchange::Zaif.market_sell(amount)
       logger.info ret
       ret = Exchange::Quoine.market_buy(amount)
