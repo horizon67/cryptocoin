@@ -15,4 +15,4 @@
 .env
 /docker
 /public/packs
-.swp
+*.swp
