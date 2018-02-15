@@ -1,0 +1,36 @@
+version: '3'
+services:
+  db-development:
+    image: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mysql/volumes:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: cryptocoin
+      MYSQL_PASSWORD: cryptocoin
+      MYSQL_DATABASE: cryptocoin_development
+  db-test:
+    image: mysql
+    ports:
+      - "4306:4306"
+    volumes:
+      - ./docker/mysql/volumes:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: cryptocoin
+      MYSQL_PASSWORD: cryptocoin
+      MYSQL_DATABASE: cryptocoin_test
+  redis-development:
+    image: redis:alpine
+    ports:
+      - '16379:6379'
+    volumes:
+      - ./docker/redis_data_development:/data
+  redis-test:
+    image: redis:alpine
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./docker/redis_data_test:/data

@@ -1,0 +1,2 @@
+class BtcJpy < ApplicationRecord
+end

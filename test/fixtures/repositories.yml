@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  language: MyString
+  pull_requests_count: 1
+  contributors_count: 1
+  watchers_count: 1
+  stargazers_count: 1
+  issues_count: 1
+  commits_count_for_the_last_week: 1
+  commits_count_for_the_last_month: 1
+
+two:
+  name: MyString
+  language: MyString
+  pull_requests_count: 1
+  contributors_count: 1
+  watchers_count: 1
+  stargazers_count: 1
+  issues_count: 1
+  commits_count_for_the_last_week: 1
+  commits_count_for_the_last_month: 1

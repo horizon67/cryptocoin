@@ -1,0 +1,58 @@
+.page-loader-wrapper
+  .loader
+    .preloader
+      .spinner-layer.pl-red
+        .circle-clipper.left
+          .circle
+        .circle-clipper.right
+          .circle
+    p Please wait...
+nav.navbar
+  .container-fluid
+    .navbar-header
+      a.navbar-brand[href="/"]
+        | Cryptocurrency Development Activitiy
+script#grid-template type="text/x-template"
+  section.content.content--extend
+    .container-fluid
+      .block-header
+        / TODO 広告
+    .col-lg-12.col-md-12.col-sm-12.col-xs-12
+      .card
+        .header
+          h2
+            | Cryptocurrencies
+        .body
+          .table-responsive
+            table.table.table-bordered.table-striped.table-hover
+              thead
+                tr role="row" 
+                  th v-for="key in columns" @click="sortBy(key)" class="{ active: sortKey == key }"
+                    = "{{ key | capitalize }}"
+                    span.arrow :class='sortOrders[key] > 0 ? "asc" : "dsc"'
+              tbody
+                tr v-for="entry in filteredData"
+                  td v-for="key in columns"
+                    template v-if='key === "name"'
+                      a v-bind:href="entry.MainRepositoryUrl"
+                        = "{{entry[key]}}"
+                    template(v-else)
+                      = "{{entry[key]}}"
+
+footer.footer
+  .container
+    p.text-muted Place sticky footer content here.
+
+#coin
+  form#search
+    | Search
+    input name="query" v-model="searchQuery"
+  coin-grid :columns="gridColumns" :data="gridData" :filter-key="searchQuery" 
+  /.row
+    .col-sm-6
+      #DataTables_Table_0_filter.dataTables_filter
+        label
+          | Search:
+          input.form-control.input-sm aria-controls="DataTables_Table_0" placeholder="" type="search" /
+
+= javascript_pack_tag 'coins_vue'

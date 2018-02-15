@@ -1,0 +1,45 @@
+section.content.content--extend
+  script#grid-template type="text/x-template"
+    div
+      .container-fluid
+        .block-header
+          / TODO 広告
+      .col-lg-12.col-md-12.col-sm-12.col-xs-12
+        .card
+          .body
+            .table-responsive
+              table.table.table-bordered.table-striped.table-hover.js-basic-example.dataTable
+                thead
+                  tr role="row" 
+                    th v-for="key in columns" @click="sortBy(key)" class="{ active: sortKey == key }"
+                      = "{{ key | capitalize }}"
+                      span.arrow :class='sortOrders[key] > 0 ? "asc" : "dsc"'
+                tbody
+                  tr v-for="entry in filteredData"
+                    td v-for="key in columns"
+                      template v-if='key === "name" && entry.owner !== null'
+                        a v-bind:href="entry.main_repository_url" target="_blank"
+                          = "{{entry[key]}}"
+                      template(v-else)
+                        = "{{entry[key]}}"
+
+  #coin
+    .container-fluid
+      .row
+        .col-sm-3
+          form#search
+            | Search
+            input.form-control.input-sm name="query" v-model="searchQuery" type="search"
+    coin-grid :columns="gridColumns" :data="gridData" :filter-key="searchQuery" 
+/footer.footer
+  .container
+    p.text-muted Place sticky footer content here.
+
+  /.row
+    .col-sm-6
+      #DataTables_Table_0_filter.dataTables_filter
+        label
+          | Search:
+          input.form-control.input-sm aria-controls="DataTables_Table_0" placeholder="" type="search" /
+
+= javascript_pack_tag 'coins_vue'

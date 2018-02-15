@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title Arbitrage
+    = stylesheet_link_tag 'application', media: 'all'
+    link[href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css"]
+    link[href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css"]
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"
+  body.theme-black
+    .page-loader-wrapper
+      .loader
+        .preloader
+          .spinner-layer.pl-red
+            .circle-clipper.left
+              .circle
+            .circle-clipper.right
+              .circle
+        p Please wait...
+    nav.navbar
+      .container-fluid
+        .navbar-header
+          a.navbar-brand[href="/"]
+            | Cryptocurrency Development Activitiy
+    == yield

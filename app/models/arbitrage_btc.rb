@@ -1,0 +1,2 @@
+class ArbitrageBtc < ApplicationRecord
+end

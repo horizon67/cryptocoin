@@ -1,0 +1,2 @@
+class InvalidExchangeNameError < RuntimeError
+end

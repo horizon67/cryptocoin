@@ -1,0 +1,17 @@
+/.bundle
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+.byebug_history
+.DS_Store
+/vendor
+/.idea
+/redis_data_development
+/redis_data_test
+.commit_template
+.ruby-version
+/data
+.env
+/docker
+/public/packs
