@@ -3,9 +3,9 @@
     every: 5s
     class: NotifyShootingUpDownWorker
   notify_best_arbitrage_btc:
-    every: 5s
+    every: 20s
     class: NotifyBestArbitrageBtcWorker
   order_btc:
-    every: 5s
+    every: 10s
     class: OrderBtcWorker
 :logfile: ./log/sidekiq.log
