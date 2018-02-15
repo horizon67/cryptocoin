@@ -19,6 +19,7 @@ set :default_stage, "production"
 set :log_level, :info
 set :yarn_flags, "--prefer-offline --production"
 set :yarn_roles, :app
+set :sidekiq_monit_conf_dir, '/etc/monit.d'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
