@@ -49,6 +49,7 @@ test:
 #
 production:
   <<: *default
-  database: cryptocoin_production
+  database: cryptocoin
+  host: <%= ENV['DB_HOST'] %>
   username: cryptocoin
-  password: <%= ENV['CRYPTOCOIN_DATABASE_PASSWORD'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
