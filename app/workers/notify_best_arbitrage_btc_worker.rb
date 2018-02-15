@@ -3,21 +3,21 @@ class NotifyBestArbitrageBtcWorker
 
   def perform(*args)
     exchanges = {}
-		exchanges[:coincheck] = Exchange::Coincheck.ticker
-		exchanges[:bitbank] = Exchange::Bitbank.ticker
-		exchanges[:bitflyer] = Exchange::Bitflyer.ticker
-		exchanges[:zaif] = Exchange::Zaif.ticker
+    exchanges[:coincheck] = Exchange::Coincheck.ticker
+    exchanges[:bitbank] = Exchange::Bitbank.ticker
+    exchanges[:bitflyer] = Exchange::Bitflyer.ticker
+    exchanges[:zaif] = Exchange::Zaif.ticker
 
-		res = Faraday.get "https://www.btcbox.co.jp/api/v1/ticker/"
+    res = Faraday.get "https://www.btcbox.co.jp/api/v1/ticker/"
     # 気配値なのでsell,buyを逆にしてる
-		exchanges[:btcbox] = {bid: JSON.parse(res.body, {:symbolize_names => true})[:buy].to_i,
-		                      ask: JSON.parse(res.body, {:symbolize_names => true})[:sell].to_i}
+    exchanges[:btcbox] = {bid: JSON.parse(res.body, {:symbolize_names => true})[:buy].to_i,
+                          ask: JSON.parse(res.body, {:symbolize_names => true})[:sell].to_i}
 
-		exchanges[:quoine] = Exchange::Quoine.ticker
+    exchanges[:quoine] = Exchange::Quoine.ticker
 
-		res = Faraday.get "https://api.fcce.jp/api/1/ticker/btc_jpy"
-		exchanges[:fcce] = {bid: JSON.parse(res.body, {:symbolize_names => true})[:bid].to_i,
-		                    ask: JSON.parse(res.body, {:symbolize_names => true})[:ask].to_i}
+    res = Faraday.get "https://api.fcce.jp/api/1/ticker/btc_jpy"
+    exchanges[:fcce] = {bid: JSON.parse(res.body, {:symbolize_names => true})[:bid].to_i,
+                        ask: JSON.parse(res.body, {:symbolize_names => true})[:ask].to_i}
     best_bid = exchanges.map{|e| [e.first, e.second[:bid]] }.to_h.max{ |x, y| x[1] <=> y[1] }
     best_ask = exchanges.map{|e| [e.first, e.second[:ask]] }.to_h.min{ |x, y| x[1] <=> y[1] }
 
