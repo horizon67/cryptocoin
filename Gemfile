@@ -40,6 +40,7 @@ gem 'jwt', '~> 2.1.0'
 gem 'unicorn', '~> 5.4.0'
 gem 'byebug', platform: :mri
 gem 'pry-byebug'
+gem 'meta-tags', '~>2.7.1'
 
 group :development, :test do
   gem 'pry-stack_explorer'
