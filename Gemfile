@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 2.7.0'
 gem 'mechanize', '~> 2.7.5'
 gem 'active_model_serializers', '~> 0.10.7'
 gem 'jwt', '~> 2.1.0'
+gem 'unicorn', '~> 5.4.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -60,6 +61,7 @@ group :development do
   gem "capistrano", '~> 3.10.0'
   gem "capistrano-bundler", '~> 1.3.0'
   gem "capistrano-rbenv", '~> 2.1.2'
+  gem 'capistrano3-unicorn', '~> 0.2.1'
   gem "capistrano-rails", '~> 1.3.0'
   gem "capistrano-slackify", require: false
   gem 'capistrano-sidekiq'
