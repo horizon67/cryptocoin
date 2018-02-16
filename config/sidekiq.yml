@@ -8,7 +8,7 @@
   order_btc:
     every: 10s
     class: OrderBtcWorker
- collect_count:
+  collect_count:
     cron: '5 0 * * * *'
     class: CollectCountWorker
 :logfile: ./log/sidekiq.log
