@@ -1,15 +1,16 @@
-:schedule:
-  notify_shooting_up_down:
-    every: 5s
-    class: NotifyShootingUpDownWorker
-  notify_best_arbitrage_btc:
-    every: 20s
-    class: NotifyBestArbitrageBtcWorker
-  order_btc:
-    every: 10s
-    class: OrderBtcWorker
-  collect_count:
-    cron: '5 0 * * * *'
-    class: CollectCountWorker
+production:
+  :schedule:
+    notify_shooting_up_down:
+      every: 5s
+      class: NotifyShootingUpDownWorker
+    notify_best_arbitrage_btc:
+      every: 20s
+      class: NotifyBestArbitrageBtcWorker
+    order_btc:
+      every: 10s
+      class: OrderBtcWorker
+    collect_count:
+      cron: '5 0 * * * *'
+      class: CollectCountWorker
 :logfile: ./log/sidekiq.log
 :concurrency: 5

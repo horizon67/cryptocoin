@@ -68,9 +68,14 @@ class CountCollector
 
   def scraping
     agent = Mechanize.new
+    agent.user_agent_alias = 'Mac Safari'
     page = agent.get("#{CountCollector::REPOSITORY_URL_BASE}/#{@repository.coin.owner}/#{@repository.name}")
-    if page.search('.Counter').size == 1
-      @issues_count = 0
+    if page.search('.text-emphasized')[0].children.text.gsub(/[^\d]/, "").to_i == 0
+      page = agent.get("#{CountCollector::REPOSITORY_URL_BASE}/#{@repository.coin.owner}/#{@repository.name}")
+    end
+
+    if page.search('.Counter').size < 3
+      @issues_count = nil
       @pull_requests_count = page.search('.Counter')[0].children.text.to_i
     else
       @issues_count = page.search('.Counter')[0].children.text.to_i
