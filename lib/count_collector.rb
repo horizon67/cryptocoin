@@ -19,6 +19,7 @@ class CountCollector
   def execute!
     set_commit_activity
     set_language
+    set_contributors_count
     scraping
 
     # db update
@@ -66,13 +67,28 @@ class CountCollector
     @language = JSON.parse(response.body, {:symbolize_names => true})[:language]
   end
 
+  def set_contributors_count
+    response = @connection.get do |req|
+      req.url "/repos/#{@repository.coin.owner}/#{@repository.name}/contributors?per_page=100" # max 100
+      req.headers['Authorization'] = "token #{ENV['GITHUB_TOKEN']}"
+    end
+
+    return if response.status == 404
+
+    if response.status == 301
+      response = @connection.get do |req|
+        req.url response.headers["location"].gsub(CountCollector::REPOSITORY_API_URL_BASE, '')
+        req.headers['Authorization'] = "token #{ENV['GITHUB_TOKEN']}"
+      end
+    end
+
+    @contributors_count = JSON.parse(response.body).size
+  end
+
   def scraping
     agent = Mechanize.new
     agent.user_agent_alias = 'Mac Safari'
     page = agent.get("#{CountCollector::REPOSITORY_URL_BASE}/#{@repository.coin.owner}/#{@repository.name}")
-    if page.search('.text-emphasized')[0].children.text.gsub(/[^\d]/, "").to_i == 0
-      page = agent.get("#{CountCollector::REPOSITORY_URL_BASE}/#{@repository.coin.owner}/#{@repository.name}")
-    end
 
     if page.search('.Counter').size < 3
       @issues_count = nil
@@ -82,7 +98,7 @@ class CountCollector
       @pull_requests_count = page.search('.Counter')[1].children.text.to_i
     end
     @commits_count = page.search('.text-emphasized')[0].children.text.gsub(/[^\d]/, "").to_i
-    @contributors_count = page.search('.text-emphasized')[3].children.text.gsub(/[^\d]/, "").to_i
+    #@contributors_count = page.search('.text-emphasized')[3].children.text.gsub(/[^\d]/, "").to_i
     @watchers_count = page.search('.social-count')[0].children.text.gsub(/[^\d]/, "").to_i
     @stargazers_count = page.search('.social-count')[1].children.text.gsub(/[^\d]/, "").to_i
   end

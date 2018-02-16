@@ -20,6 +20,8 @@ section.content.content--extend
                       template v-if='key === "name" && entry.owner !== null'
                         a v-bind:href="entry.main_repository_url" target="_blank"
                           = "{{entry[key]}}"
+                      template v-else-if='key === "contributors" && entry.contributors >= 100'
+                        = "{{entry[key]}}+"
                       template(v-else)
                         = "{{entry[key]}}"
 
