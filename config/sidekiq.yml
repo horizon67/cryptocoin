@@ -9,3 +9,4 @@
     every: 10s
     class: OrderBtcWorker
 :logfile: ./log/sidekiq.log
+:concurrency: 5
