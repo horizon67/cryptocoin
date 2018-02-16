@@ -2,9 +2,9 @@ import Vue from 'vue'
 import App from '../app.vue'
 import axios from 'axios';
 
-const ColumnsMap = {name: 'name', language: 'language', commits_for_the_last_week: 'CommitsForTheLastWeek', 
-                    commits_for_the_last_month: 'CommitsForTheLastMonth', pull_requests: 'PullRequests', contributors: 'contributors',
-                    watchers: 'watchers', stargazers: 'stargazers', issues: 'issues', commits: 'commits'}
+const ColumnsMap = {name: 'Name', language: 'Language', commits_for_the_last_week: 'CommitsForTheLastWeek', 
+                    commits_for_the_last_month: 'CommitsForTheLastMonth', pull_requests: 'PullRequests', contributors: 'Contributors',
+                    watchers: 'Watchers', stargazers: 'Stargazers', issues: 'Issues', commits: 'Commits'}
 
 Vue.component('coin-grid', {
   template: '#grid-template',
@@ -48,7 +48,6 @@ Vue.component('coin-grid', {
   },
   filters: {
     capitalize: function (str) {
-      //return str.charAt(0).toUpperCase() + str.slice(1)
       return ColumnsMap[str]
     }
   },

@@ -9,6 +9,7 @@ th {
   background-color: #5d6665;
   color: rgba(255, 255, 255, 0.66);
   cursor: pointer;
+  word-break : break-all;
 }
 
 th.active {
@@ -57,4 +58,7 @@ th.active {
   .text-muted {
     margin: 20px 0;
   }
+}
+.card .body {
+  font-size: 12px  !important;
 }
