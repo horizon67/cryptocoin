@@ -42,6 +42,7 @@ gem 'byebug', platform: :mri
 gem 'pry-byebug'
 gem 'meta-tags', '~>2.7.1'
 gem 'selenium-webdriver', '~> 3.9.0'
+gem 'rack-user_agent', '~> 0.5.2'
 
 group :development, :test do
   gem 'pry-stack_explorer'
