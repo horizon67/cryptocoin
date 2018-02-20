@@ -2,28 +2,30 @@ class OrderBtcWorker
   include Sidekiq::Worker
 
   def perform(*args)
-    amount = 0.5
+    amount = Settings.config.order_btc.amount
     logger.info "OrderBtcWorker_quoine_bitbank: #{Exchange::Bitbank.ticker[:bid] - Exchange::Quoine.ticker[:ask]}"
     logger.info "OrderBtcWorker_bitflyer_bitbank: #{Exchange::Bitbank.ticker[:bid] - Exchange::Bitflyer.ticker[:ask]}"
     logger.info "OrderBtcWorker_zaif_bitbank: #{Exchange::Bitbank.ticker[:bid] - Exchange::Zaif.ticker[:ask]}"
     logger.info "OrderBtcWorker_quoine_zaif: #{Exchange::Zaif.ticker[:bid] - Exchange::Quoine.ticker[:ask]}"
     diff = Exchange::Bitbank.ticker[:bid] - Exchange::Quoine.ticker[:ask]
-    if diff.to_f > 55000 and Exchange::Bitbank.balances[:btc].to_f > amount.to_f
-      logger.info "Transaction start"
-      logger.info "Bitbank: #{Exchange::Bitbank.balances}"
+    if diff.to_f >= Settings.config.order_btc.target_profit and 
+       Exchange::Bitbank.balances[:btc].to_f >= amount.to_f and
+       Exchange::Quoine.balances[:jpy].to_f >= (Exchange::Quoine.ticker[:ask] * amount.to_f)
+      logger.info "Order start"
       logger.info "Quoine: #{Exchange::Quoine.balances}"
-      ret = Exchange::Bitbank.market_sell(amount)
-      logger.info ret
+      logger.info "Bitbank: #{Exchange::Bitbank.balances}"
       ret = Exchange::Quoine.market_buy(amount)
       logger.info ret
-      logger.info "Bitbank: #{Exchange::Bitbank.balances}"
+      ret = Exchange::Bitbank.market_sell(amount)
+      logger.info ret
       logger.info "Quoine: #{Exchange::Quoine.balances}"
+      logger.info "Bitbank: #{Exchange::Bitbank.balances}"
 
       notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
-      notifier.ping "Transaction Success.. Amount: #{amount}, Arbitrage: #{diff}"
-      logger.info "Transaction end"
+      notifier.ping "Order Success.. Amount: #{amount}, Arbitrage: #{diff}"
+      logger.info "Order end"
+    else
+      logger.info "NotOrderd: #{diff.to_f}, #{Exchange::Bitbank.balances[:btc].to_f}, #{Exchange::Quoine.balances[:jpy].to_f}"
     end
-    #Exchange::Coincheck.market_buy(0.5)
-    #Exchange::Bitbank.market_sell(0.5)
   end
 end
