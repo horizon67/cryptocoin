@@ -710,6 +710,7 @@ GEM
     ffi (1.9.18)
     font-awesome-rails (4.7.0.3)
       railties (>= 3.2, < 5.2)
+    get_process_mem (0.2.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hirb (0.7.3)
@@ -957,6 +958,9 @@ GEM
     unicorn (5.4.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
+    unicorn-worker-killer (0.4.4)
+      get_process_mem (~> 0)
+      unicorn (>= 4, < 6)
     uniform_notifier (1.11.0)
     webrobots (0.1.2)
     websocket-driver (0.6.5)
@@ -1030,6 +1034,7 @@ DEPENDENCIES
   tilt (~> 2.0.8)
   turbolinks (~> 5.0.1)
   unicorn (~> 5.4.0)
+  unicorn-worker-killer (~> 0.4.4)
   webpacker!
   zaif (~> 0.0.2)
 
