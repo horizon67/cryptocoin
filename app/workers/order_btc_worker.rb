@@ -3,10 +3,8 @@ class OrderBtcWorker
 
   def perform(*args)
     amount = Settings.config.order_btc.amount
-    logger.info "OrderBtcWorker_quoine_bitbank: #{Exchange::Bitbank.ticker[:bid] - Exchange::Quoine.ticker[:ask]}"
-    logger.info "OrderBtcWorker_bitflyer_bitbank: #{Exchange::Bitbank.ticker[:bid] - Exchange::Bitflyer.ticker[:ask]}"
-    logger.info "OrderBtcWorker_zaif_bitbank: #{Exchange::Bitbank.ticker[:bid] - Exchange::Zaif.ticker[:ask]}"
     logger.info "OrderBtcWorker_quoine_zaif: #{Exchange::Zaif.ticker[:bid] - Exchange::Quoine.ticker[:ask]}"
+    logger.info "OrderBtcWorker_quoine_bitflyer: #{Exchange::Bitflyer.ticker[:bid] - Exchange::Quoine.ticker[:ask]}"
     diff = Exchange::Bitbank.ticker[:bid] - Exchange::Quoine.ticker[:ask]
     if diff.to_f >= Settings.config.order_btc.target_profit and 
        Exchange::Bitbank.balances[:btc].to_f >= amount.to_f and
