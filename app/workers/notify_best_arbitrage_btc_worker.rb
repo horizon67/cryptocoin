@@ -47,8 +47,8 @@ EOS
   end
 
   def noticeable?(arbitrage)
-    # 差が設定ファイルに定義している数値以上開いた、かつ過去5分以内に通知した差より1000以上大きければ通知
+    # 差が設定ファイルに定義している数値以上開いた、かつ過去20分以内に通知した差より1000以上大きければ通知
     Settings.config.notify_best_arbitrage_btc.notify_limit <= arbitrage and
-      (ArbitrageBtc.where('created_at >= ?', 10.minute.ago).order('arbitrage desc').first&.arbitrage || 0) + 1000 <= arbitrage
+      (ArbitrageBtc.where('created_at >= ?', 20.minute.ago).order('arbitrage desc').first&.arbitrage || 0) + 1000 <= arbitrage
   end
 end
