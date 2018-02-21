@@ -10,6 +10,9 @@
     "vue-loader": "^14.1.1",
     "vue-template-compiler": "^2.5.13"
   },
+  "scripts": {
+    "webpacker": "node --max_old_space_size=4096 bin/webpack --progress --color --config config/webpack/production.js"
+  },
   "devDependencies": {
     "webpack-dev-server": "^2.11.1"
   }
