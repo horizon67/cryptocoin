@@ -15,7 +15,7 @@ class Settings
 
   setting :order_btc do
     setting :amount, 0.5
-    setting :target_profit, 8000
+    setting :target_profit, 15000
   end
 
   setting :site do
