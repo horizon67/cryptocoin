@@ -30,7 +30,6 @@ class OrderBtcWorker2
   end
 
   def orderable?(sell_klass, buy_klass, profit)
-return true
     if profit.to_f >= Settings.config.order_btc2.target_profit and
        sell_klass.balances[:btc].to_f >= Settings.config.order_btc2.amount.to_f and
        buy_klass.balances[:jpy].to_f >= (buy_klass.ticker[:ask] * Settings.config.order_btc2.amount.to_f)
