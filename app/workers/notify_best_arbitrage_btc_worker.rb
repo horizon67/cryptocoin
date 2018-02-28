@@ -13,7 +13,7 @@ class NotifyBestArbitrageBtcWorker
     exchanges[:btcbox] = {bid: JSON.parse(res.body, {:symbolize_names => true})[:buy].to_i,
                           ask: JSON.parse(res.body, {:symbolize_names => true})[:sell].to_i}
 
-    exchanges[:quoine] = Exchange::Quoine.new(ENV["QUOINE_API_KEY"], ENV["QUOINE_API_SECRET"])ticker
+    exchanges[:quoine] = Exchange::Quoine.new(ENV["QUOINE_API_KEY"], ENV["QUOINE_API_SECRET"]).ticker
 
     res = Faraday.get "https://api.fcce.jp/api/1/ticker/btc_jpy"
     exchanges[:fcce] = {bid: JSON.parse(res.body, {:symbolize_names => true})[:bid].to_i,
