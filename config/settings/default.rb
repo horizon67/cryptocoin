@@ -16,6 +16,8 @@ class Settings
   setting :order_btc do
     setting :amount, 0.5
     setting :target_profit, 8000
+    setting :sell_ex, "Bitflyer"
+    setting :buy_ex, "Quoine"
   end
 
   setting :site do

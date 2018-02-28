@@ -1,31 +1,40 @@
 class OrderBtcWorker
   include Sidekiq::Worker
 
-  def perform(*args)
-    amount = Settings.config.order_btc.amount
-    logger.info "OrderBtcWorker_quoine_zaif: #{Exchange::Zaif.ticker[:bid] - Exchange::Quoine.ticker[:ask]}"
-    logger.info "OrderBtcWorker_quoine_bitflyer: #{Exchange::Bitflyer.ticker[:bid] - Exchange::Quoine.ticker[:ask]}"
-    diff = Exchange::Bitflyer.ticker[:bid] - Exchange::Quoine.ticker[:ask]
-    if diff.to_f >= Settings.config.order_btc.target_profit and 
-       Exchange::Bitflyer.balances[:btc].to_f >= amount.to_f and
-       Exchange::Quoine.balances[:jpy].to_f >= (Exchange::Quoine.ticker[:ask] * amount.to_f)
-      logger.info "OrderStart"
-      logger.info "Quoine: #{Exchange::Quoine.balances}"
-      logger.info "Bitflyer: #{Exchange::Bitflyer.balances}"
-      ret = Exchange::Bitflyer.market_sell(amount)
-      logger.info ret
-      ret = Exchange::Quoine.market_buy(amount)
-      logger.info ret
-      logger.info "Quoine: #{Exchange::Quoine.balances}"
-      logger.info "Bitflyer: #{Exchange::Bitflyer.balances}"
+  def perform(dry_run: false)
+    sell_klass_name = Settings.config.order_btc.sell_ex.classify
+    sell_klass = "Exchange::#{sell_klass_name}".constantize.new(ENV["#{sell_klass_name.upcase}_API_KEY"], ENV["#{sell_klass_name.upcase}_API_SECRET"])
+
+    buy_klass_name = Settings.config.order_btc.buy_ex.classify
+    buy_klass = "Exchange::#{buy_klass_name}".constantize.new(ENV["#{buy_klass_name.upcase}_API_KEY"], ENV["#{buy_klass_name.upcase}_API_SECRET"])
+
+    profit = sell_klass.ticker[:bid] - buy_klass.ticker[:ask]
+    if orderable?(sell_klass, buy_klass, profit)
+      logger.info "[ORDER_LOG] OrderStart -- Buy: #{buy_klass_name}, Sell: #{buy_klass_name}"
+      logger.info "[ORDER_LOG] #{buy_klass_name} Balances: #{buy_klass.balances}"
+      logger.info "[ORDER_LOG] #{sell_klass_name} Balances: #{sell_klass.balances}"
+      unless dry_run
+        buy_klass.market_buy(Settings.config.order_btc.amount)
+        sell_klass.market_sell(Settings.config.order_btc.amount)
+      end
+      logger.info "[ORDER_LOG] Order Success."
+      logger.info "[ORDER_LOG] #{buy_klass_name} Balances: #{buy_klass.balances}"
+      logger.info "[ORDER_LOG] #{sell_klass_name} Balances: #{sell_klass.balances}"
 
       notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
-      notifier.ping "Order Success.. Amount: #{amount}, Arbitrage: #{diff}"
-      logger.info "OrderEnd"
+      notifier.ping "Order Success. Amount: #{Settings.config.order_btc.amount}, Estimated Profits: #{profit * Settings.config.order_btc.amount}"
+      logger.info "[ORDER_LOG] OrderEnd -- Buy: #{buy_klass_name}, Sell: #{buy_klass_name}"
     else
-      logger.info "NotOrderd: #{diff.to_f}, #{Exchange::Bitflyer.balances[:btc].to_f}, #{Exchange::Quoine.balances[:jpy].to_f}"
+      logger.info "[ORDER_LOG] NOT_ORDERD.. Profit: #{profit.to_f}, #{buy_klass_name} Balances: #{buy_klass.balances[:jpy].to_f}, #{sell_klass_name} Balances: #{sell_klass.balances[:btc].to_f}"
     end
   rescue => e
-    logger.error "OrderBtcWorker: #{e.message}"
+    logger.error e.message
+  end
+
+  def orderable?(sell_klass, buy_klass, profit)
+    if profit.to_f >= Settings.config.order_btc.target_profit and
+       sell_klass.balances[:btc].to_f >= Settings.config.order_btc.amount.to_f and
+       buy_klass.balances[:jpy].to_f >= (buy_klass.ticker[:ask] * Settings.config.order_btc.amount.to_f)
+    end
   end
 end
