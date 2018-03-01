@@ -25,7 +25,7 @@ class OrderBtcWorker
       notifier.ping "[#{self.class.name}] Order Success. Amount: #{Settings.config.order_btc.amount}, Estimated Profits: #{profit * Settings.config.order_btc.amount}"
       logger.info "[ORDER_LOG] OrderEnd -- Buy: #{buy_klass_name}, Sell: #{buy_klass_name}"
     else
-      logger.info "[ORDER_LOG] NOT_ORDERD.. Profit: #{profit.to_f}, #{buy_klass_name} Balances: #{buy_klass.balances[:jpy].to_f}, #{sell_klass_name} Balances: #{sell_klass.balances[:btc].to_f}"
+      logger.info "[ORDER_LOG] NOT_ORDERD.. Profit: #{profit.to_f}, #{buy_klass_name} Balances: #{buy_klass.balances}, #{sell_klass_name} Balances: #{sell_klass.balances}"
     end
   rescue => e
     logger.error e.message
