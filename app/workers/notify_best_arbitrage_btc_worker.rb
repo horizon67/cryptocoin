@@ -3,7 +3,7 @@ class NotifyBestArbitrageBtcWorker
 
   def perform(*args)
     exchanges = {}
-    exchanges[:coincheck] = Exchange::Coincheck.new(ENV["COINCHECK_API_KEY"], ENV["COINCHECK_API_SECRET"]).ticker
+    #exchanges[:coincheck] = Exchange::Coincheck.new(ENV["COINCHECK_API_KEY"], ENV["COINCHECK_API_SECRET"]).ticker
     exchanges[:bitbank] = Exchange::Bitbank.new(ENV["BITBANK_API_KEY"], ENV["BITBANK_API_SECRET"]).ticker
     exchanges[:bitflyer] = Exchange::Bitflyer.new(ENV["BITFLYER_API_KEY"], ENV["BITFLYER_API_SECRET"]).ticker
     exchanges[:zaif] = Exchange::Zaif.new(ENV["ZAIF_API_KEY"], ENV["ZAIF_API_SECRET"]).ticker
@@ -13,7 +13,7 @@ class NotifyBestArbitrageBtcWorker
     exchanges[:btcbox] = {bid: JSON.parse(res.body, {:symbolize_names => true})[:buy].to_i,
                           ask: JSON.parse(res.body, {:symbolize_names => true})[:sell].to_i}
 
-    exchanges[:quoine] = Exchange::Quoine.new(ENV["QUOINE_API_KEY"], ENV["QUOINE_API_SECRET"]).ticker
+    exchanges[:quoine] = Exchange::Quoine.new(ENV["QUOINE_API_KEY1"], ENV["QUOINE_API_SECRET1"]).ticker
 
     res = Faraday.get "https://api.fcce.jp/api/1/ticker/btc_jpy"
     exchanges[:fcce] = {bid: JSON.parse(res.body, {:symbolize_names => true})[:bid].to_i,
