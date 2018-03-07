@@ -1,8 +1,11 @@
 production:
   :schedule:
     notify_shooting_up_down:
-      every: 5s
+      every: 10s
       class: NotifyShootingUpDownWorker
+    notify_shooting_up_down_btc_usd:
+      every: 10s
+      class: NotifyShootingUpDownBtcUsdWorker
     notify_best_arbitrage_btc:
       every: 30s
       class: NotifyBestArbitrageBtcWorker
