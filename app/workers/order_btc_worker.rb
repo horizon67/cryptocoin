@@ -35,6 +35,9 @@ class OrderBtcWorker
     if profit.to_f >= Settings.config.order_btc.target_profit and
        sell_klass.balances[:btc].to_f >= Settings.config.order_btc.amount.to_f and
        buy_klass.balances[:jpy].to_f >= (buy_klass.ticker[:ask] * Settings.config.order_btc.amount.to_f)
+      true
+    else
+      false
     end
   end
 end
