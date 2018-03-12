@@ -3,7 +3,7 @@ class NotifyBestArbitrageBtcWorker
 
   def perform(*args)
     exchanges = {}
-    #exchanges[:coincheck] = Exchange::Coincheck.new(ENV["COINCHECK_API_KEY"], ENV["COINCHECK_API_SECRET"]).ticker
+    exchanges[:coincheck] = Exchange::Coincheck.new(ENV["COINCHECK_API_KEY"], ENV["COINCHECK_API_SECRET"]).ticker
     exchanges[:bitbank] = Exchange::Bitbank.new(ENV["BITBANK_API_KEY"], ENV["BITBANK_API_SECRET"]).ticker
     exchanges[:bitflyer] = Exchange::Bitflyer.new(ENV["BITFLYER_API_KEY"], ENV["BITFLYER_API_SECRET"]).ticker
     exchanges[:zaif] = Exchange::Zaif.new(ENV["ZAIF_API_KEY"], ENV["ZAIF_API_SECRET"]).ticker
@@ -48,6 +48,8 @@ EOS
     logger.info "Diff : QuoineBitflyer #{exchanges[:bitflyer][:bid] - exchanges[:quoine][:ask]}"
     logger.info "Diff : QuoineBitbank #{exchanges[:bitbank][:bid] - exchanges[:quoine][:ask]}"
     logger.info "Diff : ZaifBitflyer #{exchanges[:bitflyer][:bid] - exchanges[:zaif][:ask]}"
+    logger.info "Diff : CoincheckQuoine #{exchanges[:quoine][:bid] - exchanges[:coincheck][:ask]}"
+    logger.info "Diff : CoincheckZaif #{exchanges[:zaif][:bid] - exchanges[:coincheck][:ask]}"
   end
 
   def noticeable?(arbitrage)

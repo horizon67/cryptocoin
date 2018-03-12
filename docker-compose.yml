@@ -5,7 +5,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./docker/mysql/volumes:/var/lib/mysql
+      - ./docker/mysql_development/volumes:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: cryptocoin
@@ -16,7 +16,7 @@ services:
     ports:
       - "4306:4306"
     volumes:
-      - ./docker/mysql/volumes:/var/lib/mysql
+      - ./docker/mysql_test/volumes:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: cryptocoin
