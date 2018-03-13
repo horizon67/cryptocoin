@@ -10,7 +10,7 @@ class OrderBtcWorker
 
     profit = sell_klass.ticker[:bid] - buy_klass.ticker[:ask]
     if orderable?(sell_klass, buy_klass, profit)
-      logger.info "[ORDER_LOG] OrderStart -- Buy: #{buy_klass_name}, Sell: #{buy_klass_name}"
+      logger.info "[ORDER_LOG] OrderStart -- Buy: #{buy_klass_name}, Sell: #{sell_klass_name}"
       logger.info "[ORDER_LOG] #{buy_klass_name} Balances: #{buy_klass.balances}"
       logger.info "[ORDER_LOG] #{sell_klass_name} Balances: #{sell_klass.balances}"
       unless dry_run
