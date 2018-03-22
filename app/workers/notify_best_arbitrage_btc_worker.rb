@@ -51,6 +51,7 @@ EOS
     logger.info "Diff : CoincheckQuoine #{exchanges[:quoine][:bid] - exchanges[:coincheck][:ask]}"
     logger.info "Diff : CoincheckZaif #{exchanges[:zaif][:bid] - exchanges[:coincheck][:ask]}"
     logger.info "Diff : CoincheckBitbank #{exchanges[:bitbank][:bid] - exchanges[:coincheck][:ask]}"
+    logger.info "Diff : CoincheckBitflyer #{exchanges[:bitflyer][:bid] - exchanges[:coincheck][:ask]}"
   end
 
   def noticeable?(arbitrage)
