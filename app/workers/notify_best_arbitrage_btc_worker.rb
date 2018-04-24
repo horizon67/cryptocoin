@@ -44,6 +44,7 @@ EOS
                          best_bid_exchange: best_bid.first,
                          arbitrage: arbitrage)
 
+    logger.info "Diff : QuoineCoincheck #{exchanges[:coincheck][:bid] - exchanges[:quoine][:ask]}"
     logger.info "Diff : QuoineZaif #{exchanges[:zaif][:bid] - exchanges[:quoine][:ask]}"
     logger.info "Diff : QuoineBitflyer #{exchanges[:bitflyer][:bid] - exchanges[:quoine][:ask]}"
     logger.info "Diff : QuoineBitbank #{exchanges[:bitbank][:bid] - exchanges[:quoine][:ask]}"
