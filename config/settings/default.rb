@@ -27,6 +27,10 @@ class Settings
     setting :buy_ex, "Quoine"
   end
 
+  setting :mex_maker_bot do
+    setting :amount, 10 # USD
+  end
+
   setting :site do
     setting :name, "CoinDevActivitiy"
     setting :page_title, "Cryptocurrency Development Activitiy"

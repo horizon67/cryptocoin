@@ -12,9 +12,12 @@ production:
     order_btc:
       every: 10s
       class: OrderBtcWorker
-    order_btc2:
-      every: 10s
-      class: OrderBtcWorker2
+    # order_btc2:
+    #   every: 10s
+    #   class: OrderBtcWorker2
+    mex_maker_bot:
+      every: 60s
+      class: MexMakerBotWorker
     collect_count:
       cron: '0 5 0 * * *'
       class: CollectCountWorker
