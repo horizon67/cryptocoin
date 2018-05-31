@@ -19,8 +19,12 @@ module Bitmex
       get("/api/v1/order", { params: {symbol: "XBTUSD"}})
     end
 
+    def open_orders
+      get("/api/v1/order", { params: {filter: '{"open": true}'} })
+    end
+
     def position
-      get("/api/v1/position", { params: {filter: '{"symbol": "XBTUSD"}'}})
+      get("/api/v1/position", { params: {filter: '{"symbol": "XBTUSD"}'} })
     end
 
     def close_position
@@ -31,19 +35,28 @@ module Bitmex
       order
     end
 
-    def cancel_order(id)
+    def cancel_order(id, cid)
+      payload = {
+        orderID: id,
+        clOrdID: cid
+      }
+      delete('/api/v1/order/all', payload)
+    end
+
+    def cancel_orders
+      delete('/api/v1/order/all', {})
     end
 
     def create_order(side:, size:, price:, order_type:)
-      opts = {
+      payload = {
         symbol: "XBTUSD",
         side: side,
         orderQty: size.to_f.to_s,
         price: price.to_f.to_s,
-        ordType: order_type,
-        execInst: "ParticipateDoNotInitiate"
+        execInst: "ParticipateDoNotInitiate",
+        ordType: order_type
       }
-      order = post('/api/v1/order', opts)
+      order = post('/api/v1/order', payload)
 
       if !order['orderID']
         error ||= order
@@ -64,7 +77,11 @@ module Bitmex
     def get(path, opts = {})
       uri = URI.parse("#{@url}#{path}")
       uri.query = URI.encode_www_form(opts[:params]) if opts[:params]
-      response = RestClient.get(uri.to_s, auth_headers("GET", uri.request_uri, ""))
+
+      client = Faraday.new(:url => uri.to_s)
+      response = client.get do |req|
+        req.headers = auth_headers("GET", uri.request_uri, "")
+      end
 
       if !opts[:skip_json]
         JSON.parse(response.body)
@@ -75,7 +92,13 @@ module Bitmex
 
     def post(path, payload, opts = {})
       data = JSON.unparse(payload)
-      response = RestClient.post("#{@url}#{path}", data, auth_headers("POST", path, data))
+
+      client = Faraday.new(:url => @url)
+      response = client.post do |req|
+        req.url path
+        req.headers = auth_headers("POST", path, data) 
+        req.body = data
+      end
 
       if !opts[:skip_json]
         JSON.parse(response.body)
@@ -84,18 +107,15 @@ module Bitmex
       end
     end
 
-    def put(path, opts = {})
-      response = RestClient.put("#{@url}#{path}", auth_headers(path))
+    def delete(path, payload, opts = {})
+      data = JSON.unparse(payload)
 
-      if !opts[:skip_json]
-        JSON.parse(response.body)
-      else
-        response.body
+      client = Faraday.new(:url => @url)
+      response = client.delete do |req|
+        req.url path
+        req.headers = auth_headers("DELETE", path, data) 
+        req.body = data
       end
-    end
-
-    def delete(path, opts = {})
-      response = RestClient.delete("#{@url}#{path}", auth_headers(path))
 
       if !opts[:skip_json]
         JSON.parse(response.body)

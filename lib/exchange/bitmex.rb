@@ -14,8 +14,24 @@ module Exchange
       @client.position
     end
 
+    def get_order
+      @client.order
+    end
+
+    def get_open_orders
+      @client.open_orders
+    end
+
     def close_position
       @client.close_position
+    end
+
+    def cancel_orders
+      @client.cancel_orders
+    end
+
+    def cancel_order(id, cid)
+      @client.cancel_order(id, cid)
     end
 
     # amount: USD

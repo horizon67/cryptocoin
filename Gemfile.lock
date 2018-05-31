@@ -995,6 +995,7 @@ DEPENDENCIES
   dry-configurable (~> 0.7.0)
   factory_girl_rails
   faker
+  faraday (~> 0.14.0)
   font-awesome-rails (~> 4.7.0.2)
   hirb
   html2slim

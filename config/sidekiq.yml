@@ -21,5 +21,13 @@ production:
     collect_count:
       cron: '0 5 0 * * *'
       class: CollectCountWorker
+development:
+  :schedule:
+    notify_shooting_up_down_btc_usd:
+      every: 10s
+      class: NotifyShootingUpDownBtcUsdWorker
+    # mex_maker_bot:
+    #   every: 60s
+    #   class: MexMakerBotWorker
 :logfile: ./log/sidekiq.log
 :concurrency: 5
