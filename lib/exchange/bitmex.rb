@@ -31,11 +31,11 @@ module Exchange
     end
 
     def get_order
-      @private_client.order({ params: {symbol: "XBTUSD"}})
+      @private_client.orders({ params: {symbol: "XBTUSD"}})
     end
 
     def get_open_orders
-      @private_client.order({ params: {filter: '{"open": true}'}})
+      @private_client.orders({ params: {filter: '{"open": true}'}})
     end
 
     def close_position
