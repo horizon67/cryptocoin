@@ -26,8 +26,11 @@ development:
     notify_shooting_up_down_btc_usd:
       every: 10s
       class: NotifyShootingUpDownBtcUsdWorker
-    # mex_maker_bot:
-    #   every: 60s
-    #   class: MexMakerBotWorker
+    mex_maker_bot:
+      every: 5s
+      class: MexMakerBotWorker
+    mex_predict_price:
+      every: 1800s
+      class: MexPredictPriceWorker
 :logfile: ./log/sidekiq.log
-:concurrency: 5
+:concurrency: 1

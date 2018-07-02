@@ -28,7 +28,7 @@ class Settings
   end
 
   setting :mex_maker_bot do
-    setting :amount, 5000 # USD
+    setting :amount, 1000 # USD
   end
 
   setting :site do

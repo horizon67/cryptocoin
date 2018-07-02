@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180307160004) do
+ActiveRecord::Schema.define(version: 20180702015501) do
 
-  create_table "arbitrage_btcs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "arbitrage_btcs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "best_ask_price"
     t.integer "best_bid_price"
     t.string "best_ask_exchange"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20180307160004) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "btc_jpies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "btc_jpies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "last"
     t.integer "bid"
     t.integer "ask"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20180307160004) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "btc_usds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "btc_usds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "last"
     t.integer "bid"
     t.integer "ask"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20180307160004) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "coins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "coins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.string "symbol"
     t.string "owner"
@@ -46,7 +46,15 @@ ActiveRecord::Schema.define(version: 20180307160004) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "repositories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "predict_prices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer "last_price"
+    t.integer "price"
+    t.string "candle_term"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "repositories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "coin_id"
     t.string "name"
     t.string "language"
