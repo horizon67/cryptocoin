@@ -31,23 +31,23 @@ module Exchange
     end
 
     def get_order
-      @client.order({ params: {symbol: "XBTUSD"}})
+      @private_client.order({ params: {symbol: "XBTUSD"}})
     end
 
     def get_open_orders
-      @client.order({ params: {filter: '{"open": true}'}})
+      @private_client.order({ params: {filter: '{"open": true}'}})
     end
 
     def close_position
-      @client.close_position("XBTUSD")
+      @private_client.close_position("XBTUSD")
     end
 
     def cancel_orders
-      @client.cancel_orders
+      @private_client.cancel_orders
     end
 
     def cancel_order(id, cid)
-      @client.cancel_order(id, cid)
+      @private_client.cancel_order(id, cid)
     end
 
     def balances
