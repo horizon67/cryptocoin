@@ -1,7 +1,8 @@
 version: '3'
 services:
   db-development:
-    image: mysql
+    image: mysql:8.0.14
+    command: --default-authentication-plugin=mysql_native_password
     ports:
       - "3316:3306"
     volumes:
@@ -12,7 +13,8 @@ services:
       MYSQL_PASSWORD: cryptocoin
       MYSQL_DATABASE: cryptocoin_development
   db-test:
-    image: mysql
+    image: mysql:8.0.14
+    command: --default-authentication-plugin=mysql_native_password
     ports:
       - "4316:4306"
     volumes:
