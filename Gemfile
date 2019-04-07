@@ -41,7 +41,7 @@ gem 'unicorn', '~> 5.4.0'
 gem 'byebug', platform: :mri
 gem 'pry-byebug'
 gem 'meta-tags', '~>2.7.1'
-gem 'selenium-webdriver', '~> 3.9.0'
+gem 'selenium-webdriver'
 gem 'rack-user_agent', '~> 0.5.2'
 gem 'unicorn-worker-killer', '~> 0.4.4'
 gem 'faraday', '~> 0.14.0'
