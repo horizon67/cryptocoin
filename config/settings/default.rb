@@ -35,7 +35,7 @@ class Settings
     setting :name, "CoinDevActivitiy"
     setting :page_title, "Cryptocurrency Development Activitiy"
     setting :page_description, "Cryptocurrency Development Activitiy. commits count, pull requests count, and more"
-    setting :page_keywords, "cryptocurrency,coin,development,bitcoin,btc,dev activitiy,github,commits count, pull requests count"
+    setting :page_keywords, "cryptocurrency,coin,development,BTC,Bitcoin,BCH,NEO,IOT,IOTA,ADA,ETH,Ethereum,LTC,Litecoin,XRP,Ripple,dev activitiy,github,commits count, pull requests count"
     setting :meta do
       setting :ogp do
         setting :type, "website"
