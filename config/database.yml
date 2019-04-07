@@ -20,6 +20,7 @@ default: &default
 development:
   <<: *default
   database: cryptocoin_development
+  port: 3316
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -27,6 +28,7 @@ development:
 test:
   <<: *default
   database: cryptocoin_test
+  port: 4316
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -50,6 +52,5 @@ test:
 production:
   <<: *default
   database: cryptocoin
-  host: <%= ENV['DB_HOST'] %>
   username: cryptocoin
   password: <%= ENV['DB_PASSWORD'] %>

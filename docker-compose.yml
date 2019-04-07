@@ -3,7 +3,7 @@ services:
   db-development:
     image: mysql
     ports:
-      - "3306:3306"
+      - "3316:3306"
     volumes:
       - ./docker/mysql_development/volumes:/var/lib/mysql
     environment:
@@ -14,7 +14,7 @@ services:
   db-test:
     image: mysql
     ports:
-      - "4306:4306"
+      - "4316:4306"
     volumes:
       - ./docker/mysql_test/volumes:/var/lib/mysql
     environment:
@@ -31,6 +31,6 @@ services:
   redis-test:
     image: redis:alpine
     ports:
-      - '6379:6379'
+      - '26379:6379'
     volumes:
       - ./docker/redis_data_test:/data
