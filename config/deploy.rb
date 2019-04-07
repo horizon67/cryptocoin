@@ -8,7 +8,7 @@ set :branch, 'master'
 set :deploy_to, "/home/app/cryptocoin"
 set :keep_releases, 5
 set :rbenv_type, :user
-set :rbenv_ruby, '2.4.2'
+set :rbenv_ruby, '2.6.2'
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_path, '/home/app/.rbenv'
 set :rbenv_roles, :all
