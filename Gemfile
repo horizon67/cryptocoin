@@ -5,7 +5,7 @@ ruby '2.6.2'
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-gem "rails"
+gem "rails", '~> 5.2.3'
 gem 'mysql2'
 gem 'pry-rails', '~> 0.3.6'
 gem 'aws-sdk', '~> 3.0.1'
@@ -14,20 +14,20 @@ gem 'sidekiq-failures', '~> 1.0.0'
 gem 'sidekiq-history', '~> 0.0.9'
 gem 'sidekiq-statistic', '~> 1.2.0'
 gem 'sidekiq-unique-jobs', '~> 5.0.10'
-gem 'sinatra', '~> 2.0.0', require: false
+gem 'sinatra', require: false
 gem 'redis-namespace', '~> 1.5.3'
 gem "tilt", '~> 2.0.8'
 gem 'slim-rails', '~> 3.1.3'
 gem 'rails-ujs', '~> 0.1.0'
-gem 'jquery-rails', '~> 4.3.1'
+gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0.7'
 gem 'autoprefixer-rails', '~> 7.1.6'
-gem 'font-awesome-rails', '~> 4.7.0.2'
+gem 'font-awesome-rails'
 gem 'turbolinks', '~> 5.0.1'
 gem 'slack-notifier', '~> 2.3.2'
 gem 'sidekiq-scheduler', '~> 2.2.1'
 gem 'dry-configurable', '~> 0.7.0'
-gem 'dotenv-rails', '~> 2.2.1'
+gem 'dotenv-rails'
 gem 'ruby_bitbankcc', '~> 0.1.3'
 gem 'ruby_coincheck_client', '~> 0.3.0'
 gem 'bitflyer', '~> 0.2.0'
