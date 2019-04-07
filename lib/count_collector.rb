@@ -44,10 +44,10 @@ class CountCollector
     end
 
     commit_activity = JSON.parse(response.body, {:symbolize_names => true}).reverse[0..4]
-     
-    @commits_count_for_the_last_week = commit_activity.last[:total]
+
+    @commits_count_for_the_last_week = commit_activity.sort { |a, b| a[:week] <=> b[:week] }.last[:total]
     @commits_count_for_the_last_month = commit_activity.map{|b| b[:total]}.sum
-  end 
+  end
 
   def set_language
     response = @connection.get do |req|
