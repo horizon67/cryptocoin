@@ -604,7 +604,7 @@ GEM
       faraday (~> 0.14.0)
       faraday_middleware (~> 0.12.0)
       pubnub (~> 4.0.22)
-    bitmex (0.1.2)
+    bitmex (0.2.0)
       faraday (~> 0.14.0)
       faraday_middleware (~> 0.12.0)
     builder (3.2.3)
@@ -992,7 +992,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bitflyer (~> 0.2.0)
-  bitmex (~> 0.1.2)
+  bitmex
   bullet
   byebug
   capistrano (~> 3.10.0)

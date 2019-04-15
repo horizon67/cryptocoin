@@ -45,7 +45,7 @@ gem 'selenium-webdriver'
 gem 'rack-user_agent', '~> 0.5.2'
 gem 'unicorn-worker-killer', '~> 0.4.4'
 gem 'faraday', '~> 0.14.0'
-gem 'bitmex', '~> 0.1.2'
+gem 'bitmex'
 
 group :development, :test do
   gem 'pry-stack_explorer'
