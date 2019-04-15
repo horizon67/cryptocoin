@@ -27,7 +27,7 @@ services:
   redis-development:
     image: redis:alpine
     ports:
-      - '16379:6379'
+      - '6379:6379'
     volumes:
       - ./docker/redis_data_development:/data
   redis-test:

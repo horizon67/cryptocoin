@@ -8,12 +8,12 @@ module Exchange
 
     # amount: USD
     def limit_buy(amount, price)
-      @private_client.create_order("XBTUSD", {side: "Buy", orderQty: amount.to_f.to_s, price: price, execInst: "ParticipateDoNotInitiate", ordType: "Limit"})
+      @private_client.create_order("XBTUSD", amount.to_f.to_s, {side: "Buy", price: price, execInst: "ParticipateDoNotInitiate", ordType: "Limit"})
     end
 
     # amount: USD
     def limit_sell(amount, price)
-      @private_client.create_order("XBTUSD", {side: "Sell", orderQty: amount.to_f.to_s, price: price, execInst: "ParticipateDoNotInitiate", ordType: "Limit"})
+      @private_client.create_order("XBTUSD", amount.to_f.to_s, {side: "Sell", price: price, execInst: "ParticipateDoNotInitiate", ordType: "Limit"})
     end
 
     # amount: USD
@@ -27,15 +27,15 @@ module Exchange
     end
 
     def position
-      @private_client.position({ params: {filter: '{"symbol": "XBTUSD"}'}})
+      @private_client.position({ filter: '{"symbol": "XBTUSD"}' })
     end
 
     def get_order
-      @private_client.orders({ params: {symbol: "XBTUSD"}})
+      @private_client.order({ symbol: "XBTUSD" })
     end
 
     def get_open_orders
-      @private_client.orders({ params: {filter: '{"open": true}'}})
+      @private_client.order({ filter: '{"open": true}' })
     end
 
     def close_position
@@ -53,8 +53,8 @@ module Exchange
     def balances
     end
 
-    def ticker
-      hash = @public_client.instrument_active.find {|h| h[:symbol] == "XBTUSD"}
+    def ticker symbol="XBTUSD"
+      hash = @public_client.instrument_active.find { |h| h[:symbol] == symbol }
       {bid: hash[:bidPrice].to_i,
        ask: hash[:askPrice].to_i,
        last: hash[:lastPrice].to_i}

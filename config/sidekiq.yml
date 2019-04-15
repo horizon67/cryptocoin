@@ -1,8 +1,8 @@
 production:
   :schedule:
-    notify_shooting_up_down:
-      every: 10s
-      class: NotifyShootingUpDownWorker
+    # notify_shooting_up_down:
+    #   every: 10s
+    #   class: NotifyShootingUpDownWorker
     notify_shooting_up_down_btc_usd:
       every: 10s
       class: NotifyShootingUpDownBtcUsdWorker
@@ -15,19 +15,31 @@ production:
     # mex_maker_bot:
     #   every: 60s
     #   class: MexMakerBotWorker
+    mex_maker_buy_bot:
+      every: 120s
+      class: MexMakerBuyBotWorker
+    mex_maker_sell_bot:
+      every: 120s
+      class: MexMakerSellBotWorker
     collect_count:
       cron: '0 5 0 * * *'
       class: CollectCountWorker
 development:
   :schedule:
-    notify_shooting_up_down_btc_usd:
-      every: 10s
-      class: NotifyShootingUpDownBtcUsdWorker
-    mex_maker_bot:
-      every: 5s
-      class: MexMakerBotWorker
-    mex_predict_price:
-      every: 1800s
-      class: MexPredictPriceWorker
+    # notify_shooting_up_down_btc_usd:
+    #   every: 10s
+    #   class: NotifyShootingUpDownBtcUsdWorker
+    # mex_maker_bot:
+    #   every: 5s
+    #   class: MexMakerBotWorker
+    mex_maker_buy_bot:
+      every: 120s
+      class: MexMakerBuyBotWorker
+    mex_maker_sell_bot:
+      every: 120s
+      class: MexMakerSellBotWorker
+    # mex_predict_price:
+    #   every: 1800s
+    #   class: MexPredictPriceWorker
 :logfile: ./log/sidekiq.log
 :concurrency: 1
