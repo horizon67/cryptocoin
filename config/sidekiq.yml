@@ -16,10 +16,10 @@ production:
     #   every: 60s
     #   class: MexMakerBotWorker
     mex_maker_buy_bot:
-      every: 120s
+      every: 5m
       class: MexMakerBuyBotWorker
     mex_maker_sell_bot:
-      every: 120s
+      every: 5m
       class: MexMakerSellBotWorker
     collect_count:
       cron: '0 5 0 * * *'

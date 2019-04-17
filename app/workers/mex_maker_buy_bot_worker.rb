@@ -32,7 +32,7 @@ class MexMakerBuyBotWorker
 
   def cancel_order(bitmex)
     bitmex.get_open_orders.each do |order|
-      bitmex.cancel_order(order[:orderID], order[:clOrdID]) if (order[:timestamp].in_time_zone('Tokyo') + 6.minutes) < Time.zone.now
+      bitmex.cancel_order(order[:orderID], order[:clOrdID]) if (order[:timestamp].in_time_zone('Tokyo') + 4.minutes) < Time.zone.now
     end
   end
 end
