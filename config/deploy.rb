@@ -12,7 +12,7 @@ set :rbenv_ruby, '2.6.2'
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_path, '/home/app/.rbenv'
 set :rbenv_roles, :all
-set :linked_dirs, %w{log tmp/backup tmp/pids tmp/cache tmp/sockets public/uploads .bundle}
+set :linked_dirs, %w{log tmp/backup tmp/pids tmp/cache tmp/sockets public/uploads}
 set :linked_files, %w{.env}
 set :bundle_binstubs, nil
 set :default_stage, "production"
