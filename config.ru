@@ -3,8 +3,8 @@
 # Unicorn self-process killer
 require 'unicorn/worker_killer'
 
-max_request_min =  ENV['UNICORN_MAX_REQUEST_MIN']&.to_i || 3072
-max_request_max =  ENV['UNICORN_MAX_REQUEST_MAX']&.to_i || 4096
+max_request_min =  ENV['UNICORN_MAX_REQUEST_MIN']&.to_i || 100
+max_request_max =  ENV['UNICORN_MAX_REQUEST_MAX']&.to_i || 120
 
 # Max requests per worker
 use Unicorn::WorkerKiller::MaxRequests, max_request_min, max_request_max
