@@ -31,6 +31,11 @@ class Settings
     setting :amount, 2500 # USD
   end
 
+  setting :toreten do
+    setting :amount, 0.2 # BTC
+    setting :leverage_level, 4
+  end
+
   setting :site do
     setting :name, "CoinDevActivitiy"
     setting :page_title, "Cryptocurrency Development Activitiy"

@@ -24,6 +24,9 @@ production:
     collect_count:
       cron: '0 5 0 * * *'
       class: CollectCountWorker
+    toreten:
+      every: 3s
+      class: ToretenWorker
 development:
   :schedule:
     # notify_shooting_up_down_btc_usd:
@@ -32,14 +35,17 @@ development:
     # mex_maker_bot:
     #   every: 5s
     #   class: MexMakerBotWorker
-    mex_maker_buy_bot:
-      every: 120s
-      class: MexMakerBuyBotWorker
-    mex_maker_sell_bot:
-      every: 120s
-      class: MexMakerSellBotWorker
+    # mex_maker_buy_bot:
+    #   every: 120s
+    #   class: MexMakerBuyBotWorker
+    # mex_maker_sell_bot:
+    #   every: 120s
+    #   class: MexMakerSellBotWorker
     # mex_predict_price:
     #   every: 1800s
     #   class: MexPredictPriceWorker
+    toreten:
+      every: 3s
+      class: ToretenWorker
 :logfile: ./log/sidekiq.log
 :concurrency: 1
