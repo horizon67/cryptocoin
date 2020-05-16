@@ -45,7 +45,7 @@ development:
     #   every: 1800s
     #   class: MexPredictPriceWorker
     toreten:
-      every: 3s
+      every: 1s
       class: ToretenWorker
 :logfile: ./log/sidekiq.log
 :concurrency: 1

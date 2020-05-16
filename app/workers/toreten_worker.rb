@@ -41,6 +41,7 @@ class ToretenWorker
       logger.info "OPEN: #{response['open_price']}"
       logger.info "CLOSE: #{response['close_price']}"
       logger.info "DIFF: #{response['close_price'].to_f - response['open_price'].to_f}"
+      logger.info response.inspect
     end
 
     liquid.send("leverage_market_#{side}",
