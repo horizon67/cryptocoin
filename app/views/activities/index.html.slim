@@ -10,7 +10,7 @@ section.content.content--extend
             .table-responsive
               table.table.table-bordered.table-striped.table-hover
                 thead
-                  tr role="row" 
+                  tr role="row"
                     th v-for="key in columns" @click="sortBy(key)" class="{ active: sortKey == key }"
                       = "{{ key | capitalize }}"
                       span.arrow :class='sortOrders[key] > 0 ? "asc" : "dsc"'
@@ -20,7 +20,7 @@ section.content.content--extend
                       template v-if='key === "name" && entry.owner !== null'
                         a v-bind:href="entry.main_repository_url" target="_blank"
                           = "{{entry[key]}}"
-                      template v-else-if='key === "contributors" && entry.contributors >= 100'
+                      template v-else-if='(key === "commits_for_the_last_week" || key === "commits_for_the_last_month") && entry[key] >= 100'
                         = "{{entry[key]}}+"
                       template(v-else)
                         = "{{entry[key]}}"
@@ -32,7 +32,7 @@ section.content.content--extend
           form#search
             | Search
             input.form-control.input-sm name="query" v-model="searchQuery" type="search"
-    coin-grid :columns="gridColumns" :data="gridData" :filter-key="searchQuery" 
+    coin-grid :columns="gridColumns" :data="gridData" :filter-key="searchQuery"
 /footer.footer
   .container
     p.text-muted Place sticky footer content here.

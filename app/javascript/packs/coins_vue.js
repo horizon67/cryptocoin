@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from '../app.vue'
 import axios from 'axios';
 
-const ColumnsMap = {name: 'Name', language: 'Language', commits_for_the_last_week: 'CommitsForTheLastWeek', 
+const ColumnsMap = {name: 'Name', language: 'Language', commits_for_the_last_week: 'CommitsForTheLastWeek',
                     commits_for_the_last_month: 'CommitsForTheLastMonth', pull_requests: 'PullRequests', contributors: 'Contributors',
                     watchers: 'Watchers', stargazers: 'Stargazers', issues: 'Issues', commits: 'Commits'}
 
