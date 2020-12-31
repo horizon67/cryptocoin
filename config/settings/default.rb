@@ -38,9 +38,10 @@ class Settings
 
   setting :site do
     setting :name, "CoinDevActivitiy"
-    setting :page_title, "Cryptocurrency Development Activitiy"
-    setting :page_description, "Cryptocurrency Development Activitiy. commits count, pull requests count, and more"
-    setting :page_keywords, "cryptocurrency,coin,development,BTC,Bitcoin,BCH,NEO,IOT,IOTA,ADA,ETH,Ethereum,LTC,Litecoin,XRP,Ripple,dev activitiy,github,commits count, pull requests count"
+    setting :page_title, "暗号通貨 開発状況"
+    setting :page_description, "暗号通貨の最近のコミット数が確認できます。名称での絞り込みや、コミット数などでの並び替えも可能です。"
+    setting :page_keywords, "暗号通貨,仮想通過,開発状況,開発,リポジトリ,コミット数,cryptocurrency,
+DeFi,BTC,Bitcoin,BCH,NEO,IOT,IOTA,ADA,ETH,Ethereum,LTC,Litecoin,XRP,Ripple,dev activitiy,github,commits count, pull requests count"
     setting :meta do
       setting :ogp do
         setting :type, "website"
