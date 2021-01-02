@@ -40,7 +40,7 @@ class Settings
     setting :name, "暗号通貨 開発状況"
     setting :page_title, "暗号通貨一覧"
     setting :page_description, "暗号通貨の最近のコミット数が確認できます。名称での絞り込みや、コミット数などでの並び替えも可能です。"
-    setting :page_keywords, "暗号通貨,仮想通過,一覧,開発状況,開発,リポジトリ,プルリク,コミット数,cryptocurrency,
+    setting :page_keywords, "暗号通貨,仮想通過,一覧,開発状況,開発,リポジトリ,プルリク,コミット数,ビットコイン,イーサリアム,リップル,cryptocurrency,
 DeFi,BTC,Bitcoin,BCH,NEO,IOT,IOTA,ADA,ETH,Ethereum,LTC,Litecoin,XRP,Ripple,dev activitiy,github,commits count, pull requests count"
     setting :meta do
       setting :ogp do
