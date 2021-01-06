@@ -37,11 +37,10 @@ class Settings
   end
 
   setting :site do
-    setting :name, "暗号通貨 開発状況"
-    setting :page_title, "暗号通貨一覧"
-    setting :page_description, "暗号通貨の最近のコミット数が確認できます。名称での絞り込みや、コミット数などでの並び替えも可能です。"
-    setting :page_keywords, "暗号通貨,仮想通過,一覧,開発状況,開発,リポジトリ,プルリク,コミット数,ビットコイン,イーサリアム,リップル,cryptocurrency,
-DeFi,BTC,Bitcoin,BCH,NEO,IOT,IOTA,ADA,ETH,Ethereum,LTC,Litecoin,XRP,Ripple,dev activitiy,github,commits count, pull requests count"
+    setting :name, "仮想通貨（暗号資産） 開発状況"
+    setting :page_title, "仮想通貨（暗号資産）一覧"
+    setting :page_description, "仮想通貨（暗号資産）の最近のコミット数が確認できます。名称での絞り込みや、コミット数などでの並び替えも可能です。"
+    setting :page_keywords, "暗号資産,仮想通貨,一覧,コミット数,開発,リポジトリ,プルリク,ビットコイン,イーサリアム,リップル,crypto,currency,DeFi,BTC,Bitcoin,BCH,NEO,IOT,IOTA,ADA,ETH,Ethereum,LTC,Litecoin,Cosmos,Polkadot,XRP,Ripple,github,PR"
     setting :meta do
       setting :ogp do
         setting :type, "website"
