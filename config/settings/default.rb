@@ -40,7 +40,7 @@ class Settings
     setting :name, "仮想通貨（暗号資産） 開発状況"
     setting :page_title, "仮想通貨（暗号資産）一覧"
     setting :page_description, "仮想通貨（暗号資産）の最近のコミット数が確認できます。名称での絞り込みや、コミット数などでの並び替えも可能です。"
-    setting :page_keywords, "暗号資産,仮想通貨,一覧,コミット数,開発,リポジトリ,プルリク,ビットコイン,イーサリアム,リップル,crypto,currency,DeFi,BTC,Bitcoin,BCH,NEO,IOT,IOTA,ADA,ETH,Ethereum,LTC,Litecoin,Cosmos,Polkadot,XRP,Ripple,github,PR"
+    setting :page_keywords, "暗号資産,仮想通貨,ランキング,一覧,コミット数,開発,リポジトリ,プルリク,ビットコイン,イーサリアム,リップル,crypto,currency,DeFi,BTC,Bitcoin,BCH,NEO,IOT,IOTA,ADA,ETH,Ethereum,LTC,Litecoin,Cosmos,Polkadot,XRP,Ripple,github,PR"
     setting :meta do
       setting :ogp do
         setting :type, "website"
