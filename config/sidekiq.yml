@@ -6,9 +6,9 @@ production:
     # notify_shooting_up_down_btc_usd:
     #   every: 10s
     #   class: NotifyShootingUpDownBtcUsdWorker
-    # notify_best_arbitrage_btc:
-    #   every: 30s
-    #   class: NotifyBestArbitrageBtcWorker
+    notify_best_arbitrage_btc:
+      every: 30s
+      class: NotifyBestArbitrageBtcWorker
     # order_btc:
     #   every: 10s
     #   class: OrderBtcWorker
@@ -29,6 +29,9 @@ production:
     #   class: ToretenWorker
 development:
   :schedule:
+    notify_best_arbitrage_btc:
+      every: 30s
+      class: NotifyBestArbitrageBtcWorker
     # notify_shooting_up_down_btc_usd:
     #   every: 10s
     #   class: NotifyShootingUpDownBtcUsdWorker

@@ -10,7 +10,7 @@ class Settings
   end
 
   setting :notify_best_arbitrage_btc do
-    setting :notify_limit, 10000
+    setting :notify_limit, 30000
   end
 
   setting :order_btc do
