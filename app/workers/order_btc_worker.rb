@@ -14,7 +14,13 @@ class OrderBtcWorker
       logger.info "[ORDER_LOG] #{buy_klass_name} Balances: #{buy_klass.balances}"
       logger.info "[ORDER_LOG] #{sell_klass_name} Balances: #{sell_klass.balances}"
       unless dry_run
+        before_btc = buy_klass.balances[:btc]
+        # 成り買い
         buy_klass.market_buy(Settings.config.order_btc.amount)
+        if buy_klass.balances[:btc] == before_btc
+          raise "#{buy_klass_name} failed buy"
+        end
+        # 成り売り
         sell_klass.market_sell(Settings.config.order_btc.amount)
       end
       logger.info "[ORDER_LOG] Order Success."
@@ -32,12 +38,8 @@ class OrderBtcWorker
   end
 
   def orderable?(sell_klass, buy_klass, profit)
-    if profit.to_f >= Settings.config.order_btc.target_profit and
-       sell_klass.balances[:btc].to_f >= Settings.config.order_btc.amount.to_f and
-       buy_klass.balances[:jpy].to_f >= (buy_klass.ticker[:ask] * Settings.config.order_btc.amount.to_f)
-      true
-    else
-      false
-    end
+    profit.to_f >= Settings.config.order_btc.target_profit &&
+      sell_klass.balances[:btc].to_f >= Settings.config.order_btc.amount.to_f &&
+      buy_klass.balances[:jpy].to_f >= (buy_klass.ticker[:ask] * Settings.config.order_btc.amount.to_f)
   end
 end

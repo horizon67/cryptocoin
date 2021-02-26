@@ -14,10 +14,10 @@ class Settings
   end
 
   setting :order_btc do
-    setting :amount, 0.5
-    setting :target_profit, 8000
+    setting :amount, 0.25
+    setting :target_profit, 50000
     setting :sell_ex, "Coincheck"
-    setting :buy_ex, "Quoine"
+    setting :buy_ex, "Zaif"
   end
 
   setting :order_btc2 do
