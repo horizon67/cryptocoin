@@ -38,8 +38,21 @@ class OrderBtcWorker
   end
 
   def orderable?(sell_klass, buy_klass, profit)
-    profit.to_f >= Settings.config.order_btc.target_profit &&
-      sell_klass.balances[:btc].to_f >= Settings.config.order_btc.amount.to_f &&
-      buy_klass.balances[:jpy].to_f >= (buy_klass.ticker[:ask] * Settings.config.order_btc.amount.to_f)
+    if profit.to_f < Settings.config.order_btc.target_profit
+      logger.info "[ORDER_LOG][ORDERABLE] The target amount has not been reached. #{profit.to_f}"
+      return false
+    end
+
+    if sell_klass.balances[:btc].to_f < Settings.config.order_btc.amount.to_f
+      logger.info "[ORDER_LOG][ORDERABLE] Not enough BTC to sell. #{sell_klass.balances[:btc].to_f}"
+      return false
+    end
+
+    if buy_klass.balances[:jpy].to_f < (buy_klass.ticker[:ask] * Settings.config.order_btc.amount.to_f)
+      logger.info "[ORDER_LOG][ORDERABLE] Not enough JPY to buy. #{buy_klass.balances[:jpy].to_f}"
+      return false
+    end
+
+    true
   end
 end
