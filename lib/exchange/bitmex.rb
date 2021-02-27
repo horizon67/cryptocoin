@@ -8,22 +8,22 @@ module Exchange
 
     # amount: USD
     def limit_buy(amount, price)
-      @private_client.create_order("XBTUSD", amount.to_f.to_s, {side: "Buy", price: price, execInst: "ParticipateDoNotInitiate", ordType: "Limit"})
+      @private_client.create_order("XBTUSD", amount.to_f.to_s, { side: "Buy", price: price, execInst: "ParticipateDoNotInitiate", ordType: "Limit" })
     end
 
     # amount: USD
     def limit_sell(amount, price)
-      @private_client.create_order("XBTUSD", amount.to_f.to_s, {side: "Sell", price: price, execInst: "ParticipateDoNotInitiate", ordType: "Limit"})
+      @private_client.create_order("XBTUSD", amount.to_f.to_s, { side: "Sell", price: price, execInst: "ParticipateDoNotInitiate", ordType: "Limit" })
     end
 
     # amount: USD
     def market_buy(amount)
-      @private_client.create_order("XBTUSD", {side: "Buy", orderQty: amount.to_f.to_s, price: price, execInst: "ParticipateDoNotInitiate", ordType: "Market"})
+      @private_client.create_order("XBTUSD", { side: "Buy", orderQty: amount.to_f.to_s, ordType: "Market" })
     end
 
     # amount: USD
     def market_sell(amount)
-      @private_client.create_order("XBTUSD", {side: "Sell", orderQty: amount.to_f.to_s, price: price, execInst: "ParticipateDoNotInitiate", ordType: "Market"})
+      @private_client.create_order("XBTUSD", { side: "Sell", orderQty: amount.to_f.to_s, ordType: "Market" })
     end
 
     def position

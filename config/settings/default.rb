@@ -20,19 +20,12 @@ class Settings
     setting :buy_ex, "Zaif"
   end
 
-  setting :order_btc2 do
-    setting :amount, 0.5
-    setting :target_profit, 8000
-    setting :sell_ex, "Bitflyer"
-    setting :buy_ex, "Quoine"
-  end
-
   setting :mex_maker_bot do
     setting :amount, 2500 # USD
   end
 
   setting :toreten do
-    setting :amount, 0.2 # BTC
+    setting :amount, 2000 # USD
     setting :leverage_level, 4
   end
 
