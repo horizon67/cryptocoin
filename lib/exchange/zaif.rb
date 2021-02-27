@@ -6,11 +6,11 @@ module Exchange
     end
 
     def market_buy(amount)
-      @client.ask("btc", ((ticker[:ask] + 100).to_s.chop + '0').to_i, amount)
+      @client.bid("btc", ((ticker[:ask] + 100).to_s.chop + '0').to_i, amount)
     end
 
     def market_sell(amount)
-      @client.bid("btc", (ticker[:bid] * amount).floor, amount)
+      @client.ask("btc", ((ticker[:bid] - 100).to_s.chop + '0').to_i, amount)
     end
 
     def balances
