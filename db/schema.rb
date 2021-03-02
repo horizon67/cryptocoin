@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_20_135658) do
+ActiveRecord::Schema.define(version: 2021_03_02_113019) do
 
   create_table "arbitrage_btcs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "best_ask_price"
@@ -69,6 +69,14 @@ ActiveRecord::Schema.define(version: 2020_05_20_135658) do
     t.datetime "updated_at", null: false
     t.integer "commits_count"
     t.index ["coin_id"], name: "index_repositories_on_coin_id"
+  end
+
+  create_table "settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "var", null: false
+    t.text "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["var"], name: "index_settings_on_var", unique: true
   end
 
   add_foreign_key "repositories", "coins"

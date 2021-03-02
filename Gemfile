@@ -47,6 +47,7 @@ gem 'unicorn-worker-killer', '~> 0.4.4'
 gem 'faraday', '~> 0.14.0'
 gem 'bitmex'
 gem 'twitter'
+gem 'rails-settings-cached'
 
 group :development, :test do
   gem 'pry-stack_explorer'
