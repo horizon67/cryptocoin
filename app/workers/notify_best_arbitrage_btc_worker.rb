@@ -48,6 +48,7 @@ EOS
     logger.info "Diff : QuoineBitflyer #{exchanges[:bitflyer][:bid] - exchanges[:quoine][:ask]}"
     logger.info "Diff : QuoineBitbank #{exchanges[:bitbank][:bid] - exchanges[:quoine][:ask]}"
     logger.info "Diff : ZaifBitflyer #{exchanges[:bitflyer][:bid] - exchanges[:zaif][:ask]}"
+    logger.info "Diff : BitflyerZaif #{exchanges[:zaif][:bid] - exchanges[:bitflyer][:ask]}"
     logger.info "Diff : CoincheckQuoine #{exchanges[:quoine][:bid] - exchanges[:coincheck][:ask]}"
     logger.info "Diff : CoincheckZaif #{exchanges[:zaif][:bid] - exchanges[:coincheck][:ask]}"
     logger.info "Diff : CoincheckBitbank #{exchanges[:bitbank][:bid] - exchanges[:coincheck][:ask]}"

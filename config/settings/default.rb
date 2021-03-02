@@ -14,9 +14,9 @@ class Settings
   end
 
   setting :order_btc do
-    setting :amount, 0.25
+    setting :amount, 0.254
     setting :target_profit, 55000
-    setting :sell_ex, "Coincheck"
+    setting :sell_ex, "Bitflyer"
     setting :buy_ex, "Zaif"
   end
 

@@ -28,7 +28,7 @@ class OrderBtcWorker
       logger.info "[ORDER_LOG] #{sell_klass_name} Balances: #{sell_klass.balances}"
 
       notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
-      notifier.ping "[#{self.class.name}] Order Success. Amount: #{Settings.config.order_btc.amount}, Estimated Profits: #{profit * Settings.config.order_btc.amount}"
+      notifier.ping "[#{self.class.name}] Order Success. Amount: #{Settings.config.order_btc.amount}, Profits: #{buy_klass.balances[:jpy] + sell_klass.balances[:jpy]}"
       logger.info "[ORDER_LOG] OrderEnd -- Buy: #{buy_klass_name}, Sell: #{buy_klass_name}"
     else
       logger.info "[ORDER_LOG] NOT_ORDERD.. Profit: #{profit.to_f}, #{buy_klass_name} Balances: #{buy_klass.balances}, #{sell_klass_name} Balances: #{sell_klass.balances}"
@@ -44,12 +44,12 @@ class OrderBtcWorker
     end
 
     if sell_klass.balances[:btc].to_f < Settings.config.order_btc.amount.to_f
-      logger.info "[ORDER_LOG][ORDERABLE] Not enough BTC to sell. #{sell_klass.balances[:btc].to_f}"
+      logger.info "[ORDER_LOG][ORDERABLE] Insufficient funds. BTC to sell. #{sell_klass.balances[:btc].to_f}"
       return false
     end
 
     if buy_klass.balances[:jpy].to_f < (buy_klass.ticker[:ask] * Settings.config.order_btc.amount.to_f)
-      logger.info "[ORDER_LOG][ORDERABLE] Not enough JPY to buy. #{buy_klass.balances[:jpy].to_f}"
+      logger.info "[ORDER_LOG][ORDERABLE] Insufficient funds. JPY to buy. #{buy_klass.balances[:jpy].to_f}"
       return false
     end
 
