@@ -14,21 +14,26 @@ class OrderBtcWorker
       logger.info "[ORDER_LOG] #{buy_klass_name} Balances: #{buy_klass.balances}"
       logger.info "[ORDER_LOG] #{sell_klass_name} Balances: #{sell_klass.balances}"
       unless dry_run
-        before_btc = buy_klass.balances[:btc]
+        before_buy_klass_btc = buy_klass.balances[:btc]
+        before_sell_klass_btc = sell_klass.balances[:btc]
         # 成り買い
-        buy_klass.market_buy(AppConfig.arb_amount)
-        if buy_klass.balances[:btc] == before_btc
+        logger.info "[ORDER_LOG][BUY] #{buy_klass.market_buy(AppConfig.arb_amount)}"
+        if buy_klass.balances[:btc] == before_buy_klass_btc
           raise "#{buy_klass_name} failed buy"
         end
         # 成り売り
-        sell_klass.market_sell(AppConfig.arb_amount)
+        logger.info "[ORDER_LOG][SELL] #{sell_klass.market_sell(AppConfig.arb_amount)}"
+        if sell_klass.balances[:btc] == before_sell_klass_btc
+          logger.info "[ORDER_LOG] #{sell_klass_name} failed sell. retry.."
+          logger.info "[ORDER_LOG][SELL] #{sell_klass.market_sell(AppConfig.arb_amount)}"
+        end
       end
       logger.info "[ORDER_LOG] Order Success."
       logger.info "[ORDER_LOG] #{buy_klass_name} Balances: #{buy_klass.balances}"
       logger.info "[ORDER_LOG] #{sell_klass_name} Balances: #{sell_klass.balances}"
 
       notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
-      notifier.ping "[#{self.class.name}] Order Success. Amount: #{AppConfig.arb_amount}, Profits: #{buy_klass.balances[:jpy] + sell_klass.balances[:jpy]}"
+      notifier.ping "[#{self.class.name}] Order Success. Amount: #{AppConfig.arb_amount}, Profits: #{profit}"
       logger.info "[ORDER_LOG] OrderEnd -- Buy: #{buy_klass_name}, Sell: #{buy_klass_name}"
     else
       logger.info "[ORDER_LOG] NOT_ORDERD.. Profit: #{profit.to_f}, #{buy_klass_name} Balances: #{buy_klass.balances}, #{sell_klass_name} Balances: #{sell_klass.balances}"
