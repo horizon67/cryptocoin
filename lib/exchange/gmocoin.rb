@@ -23,7 +23,7 @@ module Exchange
 
     def ticker(symbol='BTC')
       res = @public_client.ticker(symbol: symbol)[:data].first
-      { bid: res[:bid],  ask: res[:ask] }
+      { bid: res[:bid].to_i,  ask: res[:ask].to_i }
     end
   end
 end
