@@ -7,6 +7,7 @@ class NotifyBestArbitrageBtcWorker
     exchanges[:bitbank] = Exchange::Bitbank.new(ENV["BITBANK_API_KEY"], ENV["BITBANK_API_SECRET"]).ticker
     exchanges[:bitflyer] = Exchange::Bitflyer.new(ENV["BITFLYER_API_KEY"], ENV["BITFLYER_API_SECRET"]).ticker
     exchanges[:zaif] = Exchange::Zaif.new(ENV["ZAIF_API_KEY"], ENV["ZAIF_API_SECRET"]).ticker
+    exchanges[:gmocoin] = Exchange::Gmocoin.new(ENV['GMOCOIN_API_KEY'], ENV['GMOCOIN_API_SECRET']).ticker
 
     res = Faraday.get "https://www.btcbox.co.jp/api/v1/ticker/"
     # 気配値なのでsell,buyを逆にしてる
@@ -53,6 +54,8 @@ EOS
     logger.info "Diff : CoincheckZaif #{exchanges[:zaif][:bid] - exchanges[:coincheck][:ask]}"
     logger.info "Diff : CoincheckBitbank #{exchanges[:bitbank][:bid] - exchanges[:coincheck][:ask]}"
     logger.info "Diff : CoincheckBitflyer #{exchanges[:bitflyer][:bid] - exchanges[:coincheck][:ask]}"
+    logger.info "Diff : GmocoinZaif #{exchanges[:gmocoin][:bid] - exchanges[:zaif][:ask]}"
+    logger.info "Diff : CoincheckGmocoin #{exchanges[:coincheck][:bid] - exchanges[:gmocoin][:ask]}"
   end
 
   def noticeable?(arbitrage)
