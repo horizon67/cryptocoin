@@ -31,12 +31,12 @@ class OrderBtcWorker
       # 成り売り
       logger.info "[ORDER_LOG][SELL] #{sell_klass.market_sell(AppConfig.arb_amount)}"
       3.times do
+        sleep 1
         break unless sell_klass.balances[:btc] == sell_ex_balances[:btc]
 
         logger.info "[ORDER_LOG] #{sell_klass_name} failed sell. retry.."
         sleep 1
         logger.info "[ORDER_LOG][SELL] #{sell_klass.market_sell(AppConfig.arb_amount)}"
-        sleep 1
       end
     end
     logger.info success_message(profit)
@@ -74,6 +74,6 @@ class OrderBtcWorker
   end
 
   def success_message(profit)
-    "[ORDER_LOG] Order Success. Amount: #{AppConfig.arb_amount}, Profits: #{profit}"
+    "[ORDER_LOG] Order Success. Amount: #{AppConfig.arb_amount}, Profits: #{profit * AppConfig.arb_amount.to_f}"
   end
 end
