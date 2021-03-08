@@ -85,6 +85,6 @@ class OrderBtcWorker
   end
 
   def calculate_arb_amount(buy_ex_balances_jpy, buy_ex_ticker_btc)
-    @calculate_arb_amount ||= ((buy_ex_balances_jpy - 5000).to_f / buy_ex_ticker_btc).floor(3)
+    ((buy_ex_balances_jpy - 5000).to_f / buy_ex_ticker_btc).floor(3)
   end
 end
