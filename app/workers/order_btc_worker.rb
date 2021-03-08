@@ -24,7 +24,8 @@ class OrderBtcWorker
     logger.info "[ORDER_LOG] total btc: #{buy_ex_balances[:btc] + sell_ex_balances[:btc]}"
     unless dry_run
       # 成り買い
-      logger.info "[ORDER_LOG][BUY] #{buy_klass.market_buy(AppConfig.arb_amount)}"
+      # 手数料を考慮(0.2%)
+      logger.info "[ORDER_LOG][BUY] #{buy_klass.market_buy(AppConfig.arb_amount + AppConfig.arb_amount * 0.002)}"
       if buy_klass.balances[:btc] == buy_ex_balances[:btc]
         raise "#{buy_klass_name} failed buy"
       end
