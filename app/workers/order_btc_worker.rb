@@ -18,7 +18,7 @@ class OrderBtcWorker
     arb_amount = AppConfig.arb_amount || calculate_arb_amount(buy_ex_balances[:jpy], buy_ex_ticker[:ask])
     logger.info "[ORDER_LOG] arb_amount: #{arb_amount}"
 
-    unless orderable?(sell_ex_balances, buy_ex_balances, profit, arb_amount)
+    unless orderable?(sell_ex_balances, buy_ex_balances, buy_ex_ticker, profit, arb_amount)
       logger.info "[ORDER_LOG] NOT_ORDERD.. Profit: #{profit.to_f}, #{buy_klass_name} Balances: #{buy_ex_balances}, #{sell_klass_name} Balances: #{sell_ex_balances}"
       return
     end
@@ -61,7 +61,7 @@ class OrderBtcWorker
 
   private
 
-  def orderable?(sell_ex_balances, buy_ex_balances, profit, arb_amount)
+  def orderable?(sell_ex_balances, buy_ex_balances, buy_ex_ticker, profit, arb_amount)
     if profit.to_f < AppConfig.arb_target_profit
       logger.info "[ORDER_LOG][ORDERABLE] The target amount has not been reached. #{profit.to_f}"
       return false
@@ -84,7 +84,7 @@ class OrderBtcWorker
     "[ORDER_LOG] Order Success. Amount: #{AppConfig.arb_amount}, Profits: #{profit * AppConfig.arb_amount.to_f}"
   end
 
-  def calculate_arb_amount(buy_ex_balances_jpy, buy_ex_ticker_btc)
-    ((buy_ex_balances_jpy - 5000).to_f / buy_ex_ticker_btc).floor(3)
+  def calculate_arb_amount(buy_ex_balances_jpy, buy_ex_ticker_ask)
+    ((buy_ex_balances_jpy - 5000).to_f / buy_ex_ticker_ask).floor(3)
   end
 end
