@@ -30,8 +30,8 @@ class OrderBtcWorker
     logger.info "[ORDER_LOG] total btc: #{buy_ex_balances[:btc] + sell_ex_balances[:btc]}"
     unless dry_run
       # 成り買い
-      # 手数料を考慮(0.2%)
-      logger.info "[ORDER_LOG][BUY] #{buy_klass.market_buy((arb_amount * 1.002).floor(4))}"
+      # 成行手数料(0.2%) + 出金手数料(0.0003) を考慮
+      logger.info "[ORDER_LOG][BUY] #{buy_klass.market_buy((arb_amount * 1.002 + 0.0003).floor(4))}"
       if buy_klass.balances[:btc] == buy_ex_balances[:btc]
         raise "#{buy_klass_name} failed buy"
       end
@@ -86,6 +86,6 @@ class OrderBtcWorker
   end
 
   def calculate_arb_amount(buy_ex_balances_jpy, buy_ex_ticker_ask)
-    ((buy_ex_balances_jpy - 5000).to_f / buy_ex_ticker_ask).floor(3)
+    ((buy_ex_balances_jpy - 10000).to_f / buy_ex_ticker_ask).floor(3)
   end
 end
