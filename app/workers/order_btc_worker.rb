@@ -46,14 +46,15 @@ class OrderBtcWorker
         logger.info "[ORDER_LOG][SELL] #{sell_klass.market_sell(arb_amount)}"
       end
     end
-    logger.info success_message(profit)
+    actual_profit = (buy_klass.balances[:jpy] + sell_klass.balances[:jpy]) - (buy_ex_balances[:jpy] + sell_ex_balances[:jpy])
+    logger.info success_message(actual_profit, arb_amount)
     logger.info "[ORDER_LOG] #{buy_klass_name} Balances: #{buy_klass.balances}"
     logger.info "[ORDER_LOG] #{sell_klass_name} Balances: #{sell_klass.balances}"
     logger.info "[ORDER_LOG] total jpy: #{buy_klass.balances[:jpy] + sell_klass.balances[:jpy]}"
     logger.info "[ORDER_LOG] total btc: #{buy_klass.balances[:btc] + sell_klass.balances[:btc]}"
 
     notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
-    notifier.ping success_message(profit)
+    notifier.ping success_message(actual_profit, arb_amount)
     logger.info "[ORDER_LOG] OrderEnd -- Buy: #{buy_klass_name}, Sell: #{buy_klass_name}"
   rescue => e
     logger.error e.message
@@ -80,8 +81,8 @@ class OrderBtcWorker
     true
   end
 
-  def success_message(profit)
-    "[ORDER_LOG] Order Success. Amount: #{AppConfig.arb_amount}, Profits: #{profit * AppConfig.arb_amount.to_f}"
+  def success_message(profit, arb_amount)
+    "[ORDER_LOG] Order Success. Amount: #{arb_amount}, Profits: #{profit}"
   end
 
   def calculate_arb_amount(buy_ex_balances_jpy, buy_ex_ticker_ask)
