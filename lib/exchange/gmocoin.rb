@@ -8,9 +8,11 @@ module Exchange
     end
 
     def market_buy(amount)
+      @private_client.create_order('BTC', 'BUY', 'MARKET', amount)
     end
 
     def market_sell(amount)
+      @private_client.create_order('BTC', 'SELL', 'MARKET', amount)
     end
 
     def balances

@@ -13,10 +13,10 @@ module Gmocoin
         end
 
         # @see https://api.coin.z.com/docs/?ruby#order
-        def create_order(symbol, side, executionType, size, options = {})
+        def create_order(symbol, side, execution_type, size, options = {})
           @connection.post('/private/v1/order', { symbol: symbol,
                                                   side: side,
-                                                  executionType: executionType,
+                                                  executionType: execution_type,
                                                   size: size}.merge(options)).body
         end
       end
