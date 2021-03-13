@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  best_ask_price: 1
+  best_bid_price: 1
+  best_ask_exchange: MyString
+  best_bid_exchange: MyString
+  arbitrage: 1
+
+two:
+  best_ask_price: 1
+  best_bid_price: 1
+  best_ask_exchange: MyString
+  best_bid_exchange: MyString
+  arbitrage: 1

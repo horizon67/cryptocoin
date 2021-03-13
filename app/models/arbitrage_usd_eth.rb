@@ -1,0 +1,2 @@
+class ArbitrageUsdEth < ApplicationRecord
+end

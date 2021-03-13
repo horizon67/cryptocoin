@@ -9,6 +9,9 @@ production:
     notify_best_arbitrage_btc:
       every: 30s
       class: NotifyBestArbitrageBtcWorker
+    notify_best_arbitrage_eth:
+      every: 30s
+      class: NotifyBestArbitrageEthWorker
     order_btc:
       every: 10s
       class: OrderBtcWorker
