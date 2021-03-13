@@ -1,0 +1,2 @@
+class ArbitrageUsdBtc < ApplicationRecord
+end

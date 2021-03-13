@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_02_113019) do
+ActiveRecord::Schema.define(version: 2021_03_13_081726) do
 
   create_table "arbitrage_btcs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "best_ask_price"
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(version: 2021_03_02_113019) do
     t.string "best_ask_exchange"
     t.string "best_bid_exchange"
     t.integer "arbitrage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "arbitrage_usd_btcs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.float "best_ask_price"
+    t.float "best_bid_price"
+    t.string "best_ask_exchange"
+    t.string "best_bid_exchange"
+    t.float "arbitrage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
