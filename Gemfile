@@ -1,53 +1,53 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-ruby '2.6.2'
+ruby '3.0.0'
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-gem "rails", '~> 5.2.3'
+gem "rails", '~> 6.1.3'
 gem 'mysql2'
-gem 'pry-rails', '~> 0.3.6'
-gem 'aws-sdk', '~> 3.0.1'
-gem 'sidekiq', '~> 4.2.10'
-gem 'sidekiq-failures', '~> 1.0.0'
-gem 'sidekiq-history', '~> 0.0.9'
-gem 'sidekiq-statistic', '~> 1.2.0'
-gem 'sidekiq-unique-jobs', '~> 5.0.10'
+gem 'pry-rails'
+gem 'aws-sdk'
+gem 'sidekiq'
+gem 'sidekiq-failures'
+gem 'sidekiq-history'
+gem 'sidekiq-statistic'
+gem 'sidekiq-unique-jobs'
 gem 'sinatra', require: false
-gem 'redis-namespace', '~> 1.5.3'
-gem "tilt", '~> 2.0.8'
-gem 'slim-rails', '~> 3.1.3'
-gem 'rails-ujs', '~> 0.1.0'
+gem 'redis-namespace'
+gem "tilt"
+gem 'slim-rails'
+gem 'rails-ujs'
 gem 'jquery-rails'
-gem 'sass-rails', '~> 5.0.7'
-gem 'autoprefixer-rails', '~> 7.1.6'
+gem 'sass-rails'
+gem 'autoprefixer-rails'
 gem 'font-awesome-rails'
-gem 'turbolinks', '~> 5.0.1'
-gem 'slack-notifier', '~> 2.3.2'
-gem 'sidekiq-scheduler', '~> 2.2.1'
-gem 'dry-configurable', '~> 0.7.0'
+gem 'turbolinks'
+gem 'slack-notifier'
+gem 'sidekiq-scheduler'
+gem 'dry-configurable'
 gem 'dotenv-rails'
-gem 'ruby_bitbankcc', '~> 0.1.3'
-gem 'ruby_coincheck_client', '~> 0.3.0'
-gem 'bitflyer', '~> 0.2.0'
-gem 'zaif', '~> 0.0.2'
+gem 'ruby_bitbankcc'
+gem 'ruby_coincheck_client'
+gem 'bitflyer'
+gem 'zaif'
 gem 'webpacker', github: 'rails/webpacker'
-gem 'jbuilder', '~> 2.7.0'
-gem 'mechanize', '~> 2.7.5'
-gem 'active_model_serializers', '~> 0.10.7'
-gem 'jwt', '~> 2.1.0'
-gem 'unicorn', '~> 5.4.0'
+gem 'jbuilder'
+gem 'mechanize'
+gem 'active_model_serializers'
+gem 'jwt'
+gem 'unicorn'
+gem 'unicorn-worker-killer'
 gem 'byebug', platform: :mri
 gem 'pry-byebug'
-gem 'meta-tags', '~>2.7.1'
+gem 'meta-tags'
 gem 'selenium-webdriver'
-gem 'rack-user_agent', '~> 0.5.2'
-gem 'unicorn-worker-killer', '~> 0.4.4'
-gem 'faraday', '~> 0.14.0'
-gem 'bitmex'
+gem 'rack-user_agent'
+gem 'faraday'
 gem 'twitter'
 gem 'rails-settings-cached'
+gem 'bootsnap', require: false
 
 group :development, :test do
   gem 'pry-stack_explorer'
@@ -66,14 +66,14 @@ group :test do
 end
 
 group :development do
-  gem "capistrano", '~> 3.10.0'
-  gem "capistrano-bundler", '~> 1.3.0'
-  gem "capistrano-rbenv", '~> 2.1.2'
-  gem 'capistrano3-unicorn', '~> 0.2.1'
-  gem "capistrano-rails", '~> 1.3.0'
+  gem "capistrano"
+  gem "capistrano-bundler"
+  gem "capistrano-rbenv"
+  gem 'capistrano3-unicorn'
+  gem "capistrano-rails"
   gem "capistrano-slackify", require: false
   gem 'capistrano-sidekiq'
-  gem 'capistrano-yarn', '~> 2.0.2'
+  gem 'capistrano-yarn'
   gem 'listen'
   gem 'spring'
   gem 'spring-watcher-listen'
