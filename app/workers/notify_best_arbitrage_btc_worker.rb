@@ -21,7 +21,7 @@ class NotifyBestArbitrageBtcWorker
 
     arbitrage = best_bid.last - best_ask.last
     if should_notify?(arbitrage)
-      notify!(arbitrage)
+      notify!(arbitrage, best_bid, best_ask)
     end
 
     ArbitrageBtc.create!(best_ask_price: best_ask.last,
@@ -89,7 +89,7 @@ class NotifyBestArbitrageBtcWorker
       (ArbitrageBtc.where('created_at >= ?', 20.minute.ago).order('arbitrage desc').first&.arbitrage || 0) + 1000 <= arbitrage
   end
 
-  def notify!(arbitrage)
+  def notify!(arbitrage, best_bid, best_ask)
     if (Settings.config.notify_best_arbitrage_btc.notify_limit * 2) <= arbitrage
       surround = "`"
     elsif (Settings.config.notify_best_arbitrage_btc.notify_limit * 1.5) <= arbitrage
