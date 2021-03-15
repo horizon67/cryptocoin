@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from '../app.vue'
+import App from '../src/app.vue'
 import axios from 'axios';
 
 const ColumnsMap = { name: '名称', language: '言語', commits_for_the_last_week: '週間コミット数',
