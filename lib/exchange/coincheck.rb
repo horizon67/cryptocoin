@@ -15,8 +15,8 @@ module Exchange
 
     def balances
       res = @client.read_balance
-      {jpy: JSON.parse(res.body, {:symbolize_names => true})[:jpy],
-       btc: JSON.parse(res.body, {:symbolize_names => true})[:btc]}
+      {jpy: JSON.parse(res.body, {:symbolize_names => true})[:jpy].to_f,
+       btc: JSON.parse(res.body, {:symbolize_names => true})[:btc].to_f}
     end
 
     def ticker
