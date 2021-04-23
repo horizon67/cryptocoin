@@ -15,7 +15,7 @@ class OrderBtcWorker
     sell_ex_balances = sell_klass.balances
 
     profit = sell_ex_ticker[:bid] - buy_ex_ticker[:ask]
-    arb_amount = AppConfig.arb_amount || calculate_arb_amount(buy_ex_balances[:jpy], buy_ex_ticker[:ask])
+    arb_amount = AppConfig.arb_amount || calculate_arb_amount(buy_ex_balances[:jpy].to_f, buy_ex_ticker[:ask])
     logger.info "[ORDER_LOG] arb_amount: #{arb_amount}"
 
     unless orderable?(sell_ex_balances, buy_ex_balances, buy_ex_ticker, profit, arb_amount)
@@ -26,7 +26,7 @@ class OrderBtcWorker
     logger.info "[ORDER_LOG] OrderStart -- Buy: #{buy_klass_name}, Sell: #{sell_klass_name}"
     logger.info "[ORDER_LOG] #{buy_klass_name} Balances: #{buy_ex_balances}"
     logger.info "[ORDER_LOG] #{sell_klass_name} Balances: #{sell_ex_balances}"
-    logger.info "[ORDER_LOG] total jpy: #{buy_ex_balances[:jpy] + sell_ex_balances[:jpy]}"
+    logger.info "[ORDER_LOG] total jpy: #{buy_ex_balances[:jpy].to_f + sell_ex_balances[:jpy]}"
     logger.info "[ORDER_LOG] total btc: #{buy_ex_balances[:btc] + sell_ex_balances[:btc]}"
     unless dry_run
       # 成り買い
@@ -46,7 +46,7 @@ class OrderBtcWorker
         logger.info "[ORDER_LOG][SELL] #{sell_klass.market_sell(arb_amount)}"
       end
     end
-    actual_profit = (buy_klass.balances[:jpy] + sell_klass.balances[:jpy]) - (buy_ex_balances[:jpy] + sell_ex_balances[:jpy])
+    actual_profit = (buy_klass.balances[:jpy] + sell_klass.balances[:jpy]) - (buy_ex_balances[:jpy].to_f + sell_ex_balances[:jpy])
     logger.info success_message(actual_profit, arb_amount)
     logger.info "[ORDER_LOG] #{buy_klass_name} Balances: #{buy_klass.balances}"
     logger.info "[ORDER_LOG] #{sell_klass_name} Balances: #{sell_klass.balances}"
