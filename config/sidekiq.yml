@@ -6,15 +6,18 @@ production:
     # notify_shooting_up_down_btc_usd:
     #   every: 10s
     #   class: NotifyShootingUpDownBtcUsdWorker
-    notify_best_arbitrage_btc:
-      every: 30s
-      class: NotifyBestArbitrageBtcWorker
-    notify_best_arbitrage_eth:
-      every: 30s
-      class: NotifyBestArbitrageEthWorker
-    order_btc:
+    # notify_best_arbitrage_btc:
+    #   every: 30s
+    #   class: NotifyBestArbitrageBtcWorker
+    # notify_best_arbitrage_eth:
+    #   every: 30s
+    #   class: NotifyBestArbitrageEthWorker
+    # order_btc:
+    #   every: 10s
+    #   class: OrderBtcWorker
+    order_btc_usd:
       every: 10s
-      class: OrderBtcWorker
+      class: OrderBtcUsdWorker
     # mex_maker_bot:
     #   every: 60s
     #   class: MexMakerBotWorker
@@ -32,9 +35,12 @@ production:
     #   class: ToretenWorker
 development:
   :schedule:
-    notify_best_arbitrage_btc:
-      every: 30s
-      class: NotifyBestArbitrageBtcWorker
+    order_btc_usd:
+      every: 10s
+      class: OrderBtcUsdWorker
+    # notify_best_arbitrage_btc:
+    #   every: 30s
+    #   class: NotifyBestArbitrageBtcWorker
     # notify_shooting_up_down_btc_usd:
     #   every: 10s
     #   class: NotifyShootingUpDownBtcUsdWorker

@@ -27,12 +27,12 @@ class OrderBtcWorker
     logger.info "[ORDER_LOG] #{buy_klass_name} Balances: #{buy_ex_balances}"
     logger.info "[ORDER_LOG] #{sell_klass_name} Balances: #{sell_ex_balances}"
     logger.info "[ORDER_LOG] total jpy: #{buy_ex_balances[:jpy].to_f + sell_ex_balances[:jpy]}"
-    logger.info "[ORDER_LOG] total btc: #{buy_ex_balances[:btc] + sell_ex_balances[:btc]}"
+    logger.info "[ORDER_LOG] total btc: #{buy_ex_balances[:btc].to_f + sell_ex_balances[:btc]}"
     unless dry_run
       # 成り買い
       # 成行手数料(0.2%) + 出金手数料(0.0003) を考慮
       logger.info "[ORDER_LOG][BUY] #{buy_klass.market_buy((arb_amount * 1.002 + 0.0003).floor(4))}"
-      if buy_klass.balances[:btc] == buy_ex_balances[:btc]
+      if buy_klass.balances[:btc].to_f == buy_ex_balances[:btc].to_f
         raise "#{buy_klass_name} failed buy"
       end
       # 成り売り
