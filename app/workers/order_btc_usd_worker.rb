@@ -31,6 +31,8 @@ class OrderBtcUsdWorker
     notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
     notifier.ping success_message(profit, arb_amount)
     logger.info "[ORDER_LOG] OrderEnd -- Buy: #{buy_klass_name}, Sell: #{buy_klass_name}"
+
+    AppConfig.arb_target_profit = 99999
   rescue => e
     logger.error e.message
   end
