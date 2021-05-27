@@ -2,6 +2,13 @@ require 'faraday'
 
 module FaradayMiddleware
   class RaiseHttpException < Faraday::Middleware
+    class Bitfinex::BadRequest < StandardError; end
+    class Bitfinex::NotFound < StandardError; end
+    class Bitfinex::TooManyRequests < StandardError; end
+    class Bitfinex::InternalServerError < StandardError; end
+    class Bitfinex::BadGateway < StandardError; end
+    class Bitfinex::ServiceUnavailable < StandardError; end
+    class Bitfinex::GatewayTimeout < StandardError; end
 
     def initialize(app)
       super app

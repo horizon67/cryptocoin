@@ -18,7 +18,7 @@ module Bitfinex
           f.response :json, :parser_options => { :symbolize_names => true }
           f.use FaradayMiddleware::Authentication, key, secret
           f.use FaradayMiddleware::RaiseHttpException
-          f.use FaradayMiddleware::LoudLogger if Bitfinex.loud_logger
+          f.use FaradayMiddleware::LoudLogger
           f.adapter Bitfinex.adapter
         end
       end
