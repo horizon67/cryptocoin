@@ -49,8 +49,10 @@ module Exchange
 
     def ticker
       res = Faraday.get "#{@client.url}/products/#{Exchange::Quoine::PRODUCT_ID}"
-      {bid: JSON.parse(res.body, {:symbolize_names => true})[:market_bid].to_i,
-       ask: JSON.parse(res.body, {:symbolize_names => true})[:market_ask].to_i}
+      { 
+        bid: JSON.parse(res.body, {:symbolize_names => true})[:market_bid].to_i,
+        ask: JSON.parse(res.body, {:symbolize_names => true})[:market_ask].to_i
+      }
     end
   end
 end
