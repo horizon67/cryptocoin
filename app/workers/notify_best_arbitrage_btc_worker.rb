@@ -63,14 +63,11 @@ class NotifyBestArbitrageBtcWorker
     res = Faraday.get 'https://data.gateapi.io/api2/1/ticker/btc_usdt'
     exchanges[:gateio] = { bid: JSON.parse(res.body)['highestBid'].to_f, ask: JSON.parse(res.body)['lowestAsk'].to_f }
 
-    res = Faraday.get 'https://bitmax.io/api/pro/v1/ticker?symbol=BTC/USDT'
-    exchanges[:bitmax] = { bid: JSON.parse(res.body)['data']['bid'].first.to_f, ask: JSON.parse(res.body)['data']['ask'].first.to_f }
-
     res = Faraday.get 'https://ftx.com/api/markets/BTC/USD'
     exchanges[:ftx] = { bid: JSON.parse(res.body)['result']['bid'].to_f, ask: JSON.parse(res.body)['result']['ask'].to_f }
 
     res = Faraday.get 'https://api.bittrex.com/v3/markets/BTC-USD/ticker'
-    exchanges[:ftx] = { bid: JSON.parse(res.body)['bidRate'].to_f, ask: JSON.parse(res.body)['askRate'].to_f }
+    exchanges[:bittrex] = { bid: JSON.parse(res.body)['bidRate'].to_f, ask: JSON.parse(res.body)['askRate'].to_f }
 
     best_bid = exchanges.map{|e| [e.first, e.second[:bid]] }.to_h.max{ |x, y| x[1] <=> y[1] }
     best_ask = exchanges.map{|e| [e.first, e.second[:ask]] }.to_h.min{ |x, y| x[1] <=> y[1] }
